@@ -2,22 +2,22 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('user_types', (table) => {
       table.increments('id');
-      table.string('type')
+      table.string('type');
     }),
     knex.schema.createTable('product_types', (table) => {
       table.increments('id');
-      table.string('type')
+      table.string('type');
     }),
     knex.schema.createTable('status', (table) => {
       table.increments('id');
-      table.string('status')
+      table.string('status');
     }),
     knex.schema.createTable('users', (table) => {
       table.increments('id');
-      table.string('name');
-      table.string('email');
-      table.string('password');
-      table.string('phone_number');
+      table.string('name').notNullable();
+      table.string('email').notNullable();
+      table.string('password').notNullable();
+      table.string('phone_number').notNullable();
       table.integer('type_id').unsigned();
       table.foreign('type_id').references('user_types.id');
     }),
@@ -35,10 +35,10 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTable('products', (table) => {
       table.increments('id');
-      table.string('name');
-      table.string('description');
-      table.string('photo_url');
-      table.integer('duration');
+      table.string('name').notNullable();
+      table.string('description').notNullable();
+      table.string('photo_url').notNullable();
+      table.integer('duration').notNullable();
       table.integer('product_type_id').unsigned();
       table.foreign('product_type_id').references('product_types.id');
     }),
