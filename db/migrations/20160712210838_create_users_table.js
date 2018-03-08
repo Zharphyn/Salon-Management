@@ -24,7 +24,6 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('appointments', (table) => {
       table.increments('id');
       table.string('special_request');
-      table.date('date');
       table.dateTime('start_time');
       table.integer('status_id').unsigned();
       table.foreign('status_id').references('status.id');

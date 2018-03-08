@@ -1,5 +1,5 @@
 exports.seed = function(knex, Promise) {
-  return knex('product_types').del()
+  return knex.raw('truncate table product_types cascade')
     .then(function () {
       return Promise.all([
         knex('product_types').insert({id: 1, type: 'Soft Gel'}),
