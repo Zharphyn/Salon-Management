@@ -1,19 +1,373 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title class='title'>Home Page</title>
+<html>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nail Salon</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <link rel="stylesheet" href="../public/styles/horizontal_slide.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
 
+<body>
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://bulma.io">
+        <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+      </a>
+    </div>
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+      <div class="navbar-start">
+        <div class="navbar-item">
+          <a href='index.html'>Home</a>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="/documentation/overview/start/">
+          Docs
+        </a>
+          <div class="navbar-dropdown is-boxed">
+            <a class="navbar-item" href="/documentation/overview/start/">
+            Overview
+          </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
+            Modifiers
+          </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+            Columns
+          </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+            Layout
+          </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+            Form
+          </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
+            Elements
+          </a>
+            <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+            Components
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms">
+              <span class="icon">
+                <i class="fab fa-twitter"></i>
+              </span>
+              <span>
+                Tweet
+              </span>
+            </a>
+            </p>
+            <p class="control">
+              <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+              <span class="icon">
+                <i class="fas fa-download"></i>
+              </span>
+              <span>Download</span>
+            </a>
+            </p>
+          </div>
+        </div>
+      </div>
+  </nav>
+  
+  <section class="page-section block-featured-carousel">
+    <div class="row">
+      <div class="col-xs wysiwyg">
+        <div class="box-row">
+          <div class="content block-content bottomless">
+            <h1></h1>
+            <h2></h2>
+          </div>
+          <div class="flexslider">
+            <div class="flex-viewport" style="overflow: hidden; position: relative;">
+              <ul class="slides" style="width: 3600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;" data-thumb-alt="">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="https://http.cat/100" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save"</a>
+                      <span class="icon-badge label blue"><span class="text"></span></span>
+                    </div>
+                    <div class="title">
+                      <h3></h3>
+                    </div>
+                    <a href="/products/falconeri" class="view-product"></a>
+                    <a href="/products/falconeri" class="icon-badge quick-view"></a>
+                  </div>
+                </li>
+                <li class="slide" data-thumb-alt="" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="https://http.cat/400" alt="" draggable="false">
+                    </div>
+                    <div class="title">
+                      <h3></h3>
+                    </div>
+                    <a href="/products/longi-linen-silver" class="view-product"></a>
+                    <a href="/products/longi-linen-silver" class="icon-badge quick-view"></a>
+                  </div>
+                </li>
+                <li class="slide" data-thumb-alt="" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="https://http.cat/401" alt="" draggable="false">
+                      <span class="icon-badge label blue"><span class="text"></span></span>
+                    </div>
+                    <div class="title">
+                      <h3></h3>
+                    </div>
+                    <a href="/products/sorbe-white-pearl-grey" class="view-product"></a>
+                    <a href="/products/sorbe-white-pearl-grey" class="icon-badge quick-view"></a>
+                  </div>
+                </li>
+                <li class="slide" data-thumb-alt="" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/forrisio-18_large.jpg?v=1520451971" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-4&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fforrisio&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fforrisio-18.jpg&amp;description=Forrisio%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-4&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fforrisio&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fforrisio-18.jpg&amp;description=Forrisio%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Forrisio</h3>
+                    </div>
+                    <a href="/products/forrisio" class="view-product">View Product</a>
+                    <a href="/products/forrisio" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/gouache-2_large.jpg?v=1520452197" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-5&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fgouache&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fgouache-2.jpg&amp;description=Gouache%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-5&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fgouache&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fgouache-2.jpg&amp;description=Gouache%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Gouache</h3>
+                    </div>
+                    <a href="/products/gouache" class="view-product">View Product</a>
+                    <a href="/products/gouache" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/Sara_White_17.010_248H_H_large.jpg?v=1517597959" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-6&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fsara-linen-white&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FSara_White_17.010_248H_H.jpg&amp;description=Sara%20Linen%20White%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-6&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fsara-linen-white&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FSara_White_17.010_248H_H.jpg&amp;description=Sara%20Linen%20White%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Sara Linen White</h3>
+                    </div>
+                    <a href="/products/sara-linen-white" class="view-product">View Product</a>
+                    <a href="/products/sara-linen-white" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/Sara_Cloud_17.010_207H_H_large.jpg?v=1517597920" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-7&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fsara-linen-cloud&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FSara_Cloud_17.010_207H_H.jpg&amp;description=Sara%20Linen%20Cloud%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-7&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fsara-linen-cloud&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FSara_Cloud_17.010_207H_H.jpg&amp;description=Sara%20Linen%20Cloud%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Sara Linen Cloud</h3>
+                    </div>
+                    <a href="/products/sara-linen-cloud" class="view-product">View Product</a>
+                    <a href="/products/sara-linen-cloud" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/DoubleFlange_17.010_188H_H_large.jpg?v=1517597721" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-8&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fdouble-flange&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FDoubleFlange_17.010_188H_H.jpg&amp;description=Duplo%20Double%20Flange%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-8&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fdouble-flange&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FDoubleFlange_17.010_188H_H.jpg&amp;description=Duplo%20Double%20Flange%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Duplo Double Flange</h3>
+                    </div>
+                    <a href="/products/double-flange" class="view-product">View Product</a>
+                    <a href="/products/double-flange" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/Lavato-Ribbed-Grey-2_large.jpg?v=1517868849" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-9&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Flavato-ribbed-smoke&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FLavato-Ribbed-Grey-2.jpg&amp;description=Lavato%20Ribbed%20Smoke%20(*PRE-ORDER)%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-9&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Flavato-ribbed-smoke&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FLavato-Ribbed-Grey-2.jpg&amp;description=Lavato%20Ribbed%20Smoke%20(*PRE-ORDER)%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Lavato Ribbed Smoke (*PRE-ORDER)</h3>
+                    </div>
+                    <a href="/products/lavato-ribbed-smoke" class="view-product">View Product</a>
+                    <a href="/products/lavato-ribbed-smoke" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/lavato-ribbed-midnight-1_large.jpg?v=1517004242" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-10&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Flavato-ribbed-midnight&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Flavato-ribbed-midnight-1.jpg&amp;description=Lavato%20Ribbed%20Midnight%20(*PRE-ORDER)%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-10&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Flavato-ribbed-midnight&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Flavato-ribbed-midnight-1.jpg&amp;description=Lavato%20Ribbed%20Midnight%20(*PRE-ORDER)%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Lavato Ribbed Midnight (*PRE-ORDER)</h3>
+                    </div>
+                    <a href="/products/lavato-ribbed-midnight" class="view-product">View Product</a>
+                    <a href="/products/lavato-ribbed-midnight" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/Bologne_17.010_149H_H_large.jpg?v=1517597660" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-11&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fbologne-white-navy&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FBologne_17.010_149H_H.jpg&amp;description=Bologne%20White%2FNavy%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-11&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fbologne-white-navy&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FBologne_17.010_149H_H.jpg&amp;description=Bologne%20White%2FNavy%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Bologne White/Navy</h3>
+                    </div>
+                    <a href="/products/bologne-white-navy" class="view-product">View Product</a>
+                    <a href="/products/bologne-white-navy" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/indigo-3line-2_large.jpg?v=1517540508" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-12&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Floft-3-line&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Findigo-3line-2.jpg&amp;description=Loft%20-%203%20Line%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-12&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Floft-3-line&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Findigo-3line-2.jpg&amp;description=Loft%20-%203%20Line%20">Save</a>
+                    </div>
+                    <div class="title">
+                      <h3>Loft - 3 Line</h3>
+                    </div>
+                    <a href="/products/loft-3-line" class="view-product">View Product</a>
+                    <a href="/products/loft-3-line" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/provinceofcanada-capethrow-navyash_large.jpg?v=1517935241" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-13&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fcape-throw-navy-ash&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fprovinceofcanada-capethrow-navyash.jpg&amp;description=Cape%20Throw%20Navy%2FAsh%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-13&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fcape-throw-navy-ash&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fprovinceofcanada-capethrow-navyash.jpg&amp;description=Cape%20Throw%20Navy%2FAsh%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Cape Throw Navy/Ash</h3>
+                    </div>
+                    <a href="/products/cape-throw-navy-ash" class="view-product">View Product</a>
+                    <a href="/products/cape-throw-navy-ash" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/CrossStitch_H_H_Globe_b880e636-52c8-41fc-828d-10378771559e_large.jpg?v=1508942743" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-14&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Flavato-linen-cross-stitch-grey&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FCrossStitch_H_H_Globe_b880e636-52c8-41fc-828d-10378771559e.jpg&amp;description=Lavato%20Linen%20Cross-Stitch%20Grey%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-14&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Flavato-linen-cross-stitch-grey&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FCrossStitch_H_H_Globe_b880e636-52c8-41fc-828d-10378771559e.jpg&amp;description=Lavato%20Linen%20Cross-Stitch%20Grey%20">Save</a>
+                    </div>
+                    <div class="title">
+                      <h3>Lavato Linen Cross-Stitch Grey</h3>
+                    </div>
+                    <a href="/products/lavato-linen-cross-stitch-grey" class="view-product">View Product</a>
+                    <a href="/products/lavato-linen-cross-stitch-grey" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/Devon-White-1_large.jpg?v=1517868832" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-15&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fdevon-lightweight-cotton-matelasse-white&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FDevon-White-1.jpg&amp;description=Devon%20Lightweight%20Cotton%20Matelass%C3%A9%20White%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-15&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fdevon-lightweight-cotton-matelasse-white&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FDevon-White-1.jpg&amp;description=Devon%20Lightweight%20Cotton%20Matelass%C3%A9%20White%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Devon Lightweight Cotton Matelassé White</h3>
+                    </div>
+                    <a href="/products/devon-lightweight-cotton-matelasse-white" class="view-product">View Product</a>
+                    <a href="/products/devon-lightweight-cotton-matelasse-white" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/Tori-Navy-1_large.jpg?v=1517865762" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-16&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Ftori-navy-white&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FTori-Navy-1.jpg&amp;description=Tori%20Navy%2FWhite%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-16&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Ftori-navy-white&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2FTori-Navy-1.jpg&amp;description=Tori%20Navy%2FWhite%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Tori Navy/White</h3>
+                    </div>
+                    <a href="/products/tori-navy-white" class="view-product">View Product</a>
+                    <a href="/products/tori-navy-white" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/abyss-denim-1_large.jpg?v=1516828463" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-17&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fabyss-super-pile-towels-denim&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fabyss-denim-1.jpg&amp;description=Abyss%20Super%20Pile%20Towels%20Denim%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-17&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fabyss-super-pile-towels-denim&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fabyss-denim-1.jpg&amp;description=Abyss%20Super%20Pile%20Towels%20Denim%20">Save</a>
+                    </div>
+                    <div class="title">
+                      <h3>Abyss Super Pile Towels Denim</h3>
+                    </div>
+                    <a href="/products/abyss-super-pile-towels-denim" class="view-product">View Product</a>
+                    <a href="/products/abyss-super-pile-towels-denim" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+                <li class="slide" style="width: 295.8px; margin-right: 0px; float: left; display: block;">
+                  <div class="product-card active">
+                    <div class="image active">
+                      <img src="//cdn.shopify.com/s/files/1/0114/2302/products/designers-guild-cushion-cellini-graphite-front_large.jpg?v=1516827913" alt="" draggable="false">
+                      <a class="PIN_1520482680448_button_pin PIN_1520482680448_save" href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-18&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fcellini-graphite-cushion&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fdesigners-guild-cushion-cellini-graphite-front.jpg&amp;description=Cellini%20Graphite%20Cushion%20" data-pin-log="button_pinit" data-pin-href="https://www.pinterest.com/pin/create/button/?guid=fhbAyX08cnxs-18&amp;url=https%3A%2F%2Fwww.aulitfinelinens.com%2Fproducts%2Fcellini-graphite-cushion&amp;media=http%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0114%2F2302%2Fproducts%2Fdesigners-guild-cushion-cellini-graphite-front.jpg&amp;description=Cellini%20Graphite%20Cushion%20">Save</a>
+                      <span class="icon-badge label blue"><span class="text">brand new</span></span>
+                    </div>
+                    <div class="title">
+                      <h3>Cellini Graphite Cushion</h3>
+                    </div>
+                    <a href="/products/cellini-graphite-cushion" class="view-product">View Product</a>
+                    <a href="/products/cellini-graphite-cushion" class="icon-badge quick-view">Quick View</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <ol class="flex-control-nav flex-control-paging">
+              <li><a href="#" class="flex-active">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+            </ol>
+            <ul class="flex-direction-nav">
+              <li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li>
+              <li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container is-fluid">
+      <div class="columns">
+        <div class="column is-primary">
+          First column
+        </div>
+        <div class="column">
+          Second column
+        </div>
+        <div class="column">
+          Third column
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
 
-  </head>
-
-  <body>
-    <h1>Hello World!</h1>
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-  </body>
 </html>
