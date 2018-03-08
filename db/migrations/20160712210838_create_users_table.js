@@ -49,7 +49,6 @@ exports.up = function(knex, Promise) {
       table.foreign('user_id').references('users.id');
       table.integer('appointment_id').unsigned();
       table.foreign('appointment_id').references('appointments.id');
-
     }),
     knex.schema.createTable('appointments_products', (table) => {
       table.increments('id');
@@ -57,7 +56,6 @@ exports.up = function(knex, Promise) {
       table.foreign('appointment_id').references('appointments.id');
       table.integer('product_id').unsigned();
       table.foreign('product_id').references('products.id');
-
     }),
     knex.schema.createTable('work_schedules', (table) => {
       table.increments('id');
@@ -67,7 +65,6 @@ exports.up = function(knex, Promise) {
       table.string('phone_number');
       table.integer('user_staff_id').unsigned();
       table.foreign('user_staff_id').references('users.id');
-
     })
   ])
 };
