@@ -39,6 +39,7 @@ exports.up = function(knex, Promise) {
       table.string('description').notNullable();
       table.string('photo_url').notNullable();
       table.integer('duration').notNullable();
+      table.integer('price').notNullable();
       table.integer('product_type_id').unsigned();
       table.foreign('product_type_id').references('product_types.id');
     }),
