@@ -28,10 +28,32 @@ $(() => {
     $('section').prepend($base);
     $('html').addClass('is-clipped');
   }
+  const loginform = () => {
+    const $formDiv = $('<div>').addClass('container');
+    const $emailField = $('<div>').addClass('field');
+    const $emailP = $('<p>').addClass('control has-icons-left');
+    const $emailInput = $('<input>').addClass('input').attr({ type: 'email', placeholder: 'Email' });
+    const $emailSpan = $('<span>').addClass('icon is-small is-left');
+    const $emailIcon = $('<i>').addClass('fas fa-envelope');
+    const $passwordField = $('<div>').addClass('field');
+    const $passwordP = $('<p>').addClass('control has-icons-left');
+    const $passwordInput = $('<input>').addClass('input').attr({ type: 'password', placeholder: 'Password' });
+    const $passwordSpan = $('<span>').addClass('icon is-small is-left');
+    const $passowrdIcon = $('<i>').addClass('fas fa-lock');
+
+    $emailField.append($emailP);
+    $emailP.append($emailInput).append($emailSpan);
+    $emailSpan.append($emailIcon);
+    $passwordField.append($passwordP);
+    $passwordP.append($passwordInput).append($passwordSpan);
+    $passwordSpan.append($passowrdIcon);
+    $formDiv.append($emailField).append($passwordField);
+
+  }
 
   $('#loginButton').click(() => {
     console.log('working');
-    buildModal();
+    buildModal(loginform());
 
   });
   //use this template when element doesn't exist but you expect it to exist
