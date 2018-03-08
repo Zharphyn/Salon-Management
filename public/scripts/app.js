@@ -7,6 +7,7 @@ $(() => {
       $("<div>").text(user.name).appendTo($("body"));
     }
   });
+<<<<<<< HEAD
   //bulding a modal
   const buildModal = () => {
     console.log('dafaq');
@@ -66,6 +67,5 @@ $(() => {
     $(this).parent().removeClass('is-active');
     $('html').removeClass('is-clipped');
   });
-
 
 });
