@@ -23,7 +23,7 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTable('appointments', (table) => {
       table.increments('id');
-      table.string('comments');
+      table.string('special_request');
       table.date('date');
       table.dateTime('start_time');
       table.integer('status_id').unsigned();
@@ -71,14 +71,14 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('users'),
-    knex.schema.dropTable('user_types'),
-    knex.schema.dropTable('products'),
-    knex.schema.dropTable('product_types'),
-    knex.schema.dropTable('appointments'),
-    knex.schema.dropTable('appointments_products'),
     knex.schema.dropTable('work_schedules'),
+    knex.schema.dropTable('appointments_products'),
+    knex.schema.dropTable('feedback'),
+    knex.schema.dropTable('products'),
+    knex.schema.dropTable('appointments'),
+    knex.schema.dropTable('users'),
     knex.schema.dropTable('status'),
-    knex.schema.dropTable('feedback')
+    knex.schema.dropTable('product_types'),
+    knex.schema.dropTable('user_types')
   ])
 };
