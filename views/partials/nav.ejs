@@ -29,8 +29,13 @@
         Contact Us
       </a>
   <div id="topNavButtons" class="navbar-item is-pulled-right">
-    <a id="loginButton" class="button is-primary is-rounded is-pulled-right">login</a>
-    <a id="registerButton" class="button is-info is-rounded is-pulled-right">register</a>
+    <% if (!loggedIn) { %>
+      <a id="loginButton" class="button is-primary is-rounded is-pulled-right">login</a>
+      <a id="registerButton" class="button is-info is-rounded is-pulled-right">register</a>
+    <% } else { %>
+      <a id="logoutButton" class="button is-primary is-rounded is-pulled-right">logout</a>
+      <a id="userButton" class="button is-info is-rounded is-pulled-right">Edit User</a>
+    <% } %>  
     <a class="button is-danger is-rounded is-pulled-right">Book Online</a>
   </div>
 </nav>

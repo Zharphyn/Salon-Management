@@ -13,7 +13,13 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
-
+var cookieSession = require('cookie-session')
+app.use(cookieSession({
+  name: 'session',
+  keys: ['Di', 'Grace', 'Brad'],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
@@ -35,7 +41,10 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  const templateVars = {loggedIn: req.session.loggedin};
+  var x = 'innnocuous cheerful message not written by a crazy mentor';
+
+  res.render("index", templateVars);
 });
 
 app.get("/products", (req, res) => {
@@ -48,7 +57,8 @@ app.post("/login", (req, res) => {
   .from('users')
   .where('email', req.body.email)
   .then((useremail) => {
-    console.log(bcrypt('123', 10));
+    req.session.id = useremail.id;
+    req.session.loggedin = !!(useremail);
     res.redirect('/');
   })
 });
@@ -60,6 +70,7 @@ app.get("/about", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

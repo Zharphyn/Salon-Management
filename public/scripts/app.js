@@ -145,7 +145,12 @@ $(() => {
       type: "POST",
       url: '/login',
       data: dataObj,
-    }).then(() => location = '/');
+    }).then(() => {
+      location = '/';
+    });
 
   })
+  // if (session.loggedin) {
+  //   $('#loginButton').text('I am now logout');
+  // }
 });
