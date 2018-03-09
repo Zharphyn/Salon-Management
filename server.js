@@ -37,6 +37,19 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/products", (req, res) => {
+  res.render("products");
+});
+
+app.post("/login", (req, res) => {
+  knex.select('*')
+  .from('users')
+  .where('email', req.body.email)
+  .then((useremail) => {
+    res.redirect('/');
+  })
+});
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
