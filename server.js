@@ -50,6 +50,10 @@ app.post("/login", (req, res) => {
   })
 });
 
+app.get('/profile',(req,res)=>{
+  res.render('userUpdate');
+});
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
