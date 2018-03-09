@@ -5,3 +5,4 @@ public/styles
 *.sqlite3
 .ds_store
 package-lock.json
+
