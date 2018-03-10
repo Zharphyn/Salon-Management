@@ -1,4 +1,5 @@
 $(() => {
+
   $.ajax({
     method: "GET",
     url: "/api/users"
@@ -20,7 +21,7 @@ $(() => {
     });
     var $emailSpan = $('<span>').addClass('icon is-small is-left');
     var $emailIcon = $('<i>').addClass('fas fa-envelope');
-    
+
     var $passwordField = $('<div>').addClass('field');
     var $passwordP = $('<p>').addClass('control has-icons-left');
     var $passwordInput = $('<input>').addClass('input secret').attr({
@@ -34,7 +35,7 @@ $(() => {
     $emailField.append($emailP);
     $emailP.append($emailInput).append($emailSpan);
     $emailSpan.append($emailIcon);
-    
+
     $passwordField.append($passwordP);
     $passwordP.append($passwordInput).append($passwordSpan);
     $passwordSpan.append($passowrdIcon);
@@ -116,7 +117,7 @@ $(() => {
   //use this template when element doesn't exist but you expect it to exist
   // $('body').on('click', '.modal-background', function(event){
 
-  $('body').on('click', '.modal-background', function (event) {
+  $('body').on('click', '.modal-background', function(event) {
     event.preventDefault();
     const $modal = $(this).parent();
     $modal.removeClass('is-active');
@@ -125,7 +126,7 @@ $(() => {
     $($modal).remove();
   });
 
-  $('body').on('click', '#modalCancel', function (event) {
+  $('body').on('click', '#modalCancel', function(event) {
     event.preventDefault();
     const $modal = $(this).parent().parent().parent();
     $modal.removeClass('is-active');
@@ -133,19 +134,19 @@ $(() => {
     $($modal).remove()
   });
 
-  $('body').on('click', '#modalLogin', function (event) {
+  $('body').on('click', '#modalLogin', function(event) {
     let email = $('.email').val();
     let password = $('.secret').val();
     let dataObj = {
       email: email,
       password: password
     };
-    
+
     $.ajax({
       type: "POST",
       url: '/login',
       data: dataObj,
     }).then(() => location = '/');
 
-  })
+  });
 });
