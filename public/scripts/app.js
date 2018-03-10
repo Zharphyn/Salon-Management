@@ -104,9 +104,10 @@ $(() => {
 
 
   $('#loginButton').click(() => {
+    console.log('login button clicked!!')
     const $loginForm = loginForm();
     buildModal($loginForm, 'Login');
-
+    console.log('I built the modal')
   });
 
   $('#registerButton').click(() => {
