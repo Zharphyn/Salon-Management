@@ -13,7 +13,13 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
-
+var cookieSession = require('cookie-session')
+app.use(cookieSession({
+  name: 'session',
+  keys: ['Di', 'Grace', 'Brad'],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
@@ -35,27 +41,43 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  const templateVars = {loggedIn: req.session.loggedin};
+  // var x = 'innnocuous cheerful message not written by a crazy mentor';
+
+  res.render("index", templateVars);
 });
 
 app.get("/products", (req, res) => {
-  res.render("products");
+  const templateVars = { loggedIn: req.session.loggedin };
+  res.render("products", templateVars);
 });
-
 
 app.post("/login", (req, res) => {
   knex.select('id', 'password')
   .from('users')
   .where('email', req.body.email)
   .then((useremail) => {
-    console.log(bcrypt('123', 10));
+    req.session.id = useremail.id;
+    req.session.loggedin = !!(useremail);
     res.redirect('/');
   })
 });
 
+<<<<<<< HEAD
 app.get('/profile',(req,res)=>{
   res.render('userUpdate');
+=======
+app.get("/about", (req, res) => {
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render("about", templateVars);
 });
+
+app.get("/contact", (req, res) => {
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render("contact", templateVars);
+>>>>>>> loginroutes
+});
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

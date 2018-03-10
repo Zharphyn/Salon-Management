@@ -1,0 +1,14 @@
+$(() => {
+
+  $('#loginButton').text('logoutButton');
+
+
+
+
+
+
+
+
+
+
+})

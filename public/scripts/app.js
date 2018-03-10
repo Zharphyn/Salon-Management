@@ -146,7 +146,16 @@ $(() => {
       type: "POST",
       url: '/login',
       data: dataObj,
-    }).then(() => location = '/');
+    }).then(() => {
+      location = '/';
+    });
 
+<<<<<<< HEAD
   });
+=======
+  })
+  // if (session.loggedin) {
+  //   $('#loginButton').text('I am now logout');
+  // }
+>>>>>>> loginroutes
 });
