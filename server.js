@@ -17,8 +17,6 @@ const knexLogger = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
-const saltRounds = 10;
-
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -43,7 +41,6 @@ app.locals.user = {
 app.use("/api/users", usersRoutes(knex));
 app.use(cookieSession({
   name: 'session',
-<<<<<<< HEAD
   keys: ['di', 'brad', 'grace'],
   maxAge: 24 * 60 * 60 * 1000
 }))
@@ -59,11 +56,6 @@ app.get("/products", (req, res) => {
   res.render("products",templateVars);
 });
 
-=======
-  keys: ['Di', 'Brad', 'Grace'],
-  maxAge: 24 * 60 * 60 * 1000
-}))
->>>>>>> efb2380b5a0615969e25aa82f5f8d26f8765a38c
 // Promise resolves with a user or rejects with
 function authenticateUser(email, password) {
   return knex.first('id', 'password')
@@ -73,17 +65,12 @@ function authenticateUser(email, password) {
       if (user === undefined) throw new Error('No User');
       return bcrypt.compare(password, user.password)
         .then((matches) => {
-<<<<<<< HEAD
           if (!matches) throw new Error('Password Mismatch')
-=======
-          if (matches) throw new Error('Password Mismatch')
->>>>>>> efb2380b5a0615969e25aa82f5f8d26f8765a38c
           return user;
         });
     });
 }
 
-<<<<<<< HEAD
 app.post("/login", (req, res) => {
   console.log(req.body)
 const { email, password } = req.body;
@@ -165,67 +152,6 @@ app.post('/logout', (req, res) => {
   res.redirect('/');
 });
 
-=======
-// Home page
-app.get("/", (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn }
-  res.render("index", templateVars);
-});
-
-app.get("/products", (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn }
-  res.render("products", templateVars);
-});
-
-
-app.post("/login", (req, res) => {
-  authenticateUser(req.body.email, req.body.password)
-    .then((user) => {
-      // Log them in.
-      console.log(user);
-      req.session.user_id = user.id;
-      req.session.loggedIn = !!user;
-      res.redirect('/')
-    })
-    .catch(err => {
-      console.log('Error: ', err.message);
-    });
-});
-
-app.get('/profile', (req, res) => {
-
-  res.render('userUpdate');
-});
-
-app.get('/profile/:id', (req, res) => {
-
-});
-
-app.post('/profile/:id', (req, res) => {
-
-});
-
-app.get('/schedule', (req, res) => {
-
-});
-
-app.get('/schedule/:id', (req, res) => {
-
-});
-
-app.post('schedule/:id/edit', (req, res) => {
-
-});
-
-app.get('/about', (req, res) => {
-
-});
-
-app.get('/contact', (req, res) => {
-  res.json(['some', 'stuff']);
-});
-
->>>>>>> efb2380b5a0615969e25aa82f5f8d26f8765a38c
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });

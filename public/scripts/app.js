@@ -123,20 +123,9 @@ $(() => {
     return $modal;
   }
 
-
-<<<<<<< HEAD
-
-
-  $('#loginButton').click((event)=>{
-       const $loginForm = loginForm();
-    buildModal($loginForm, 'Login');
-=======
-  $('#loginButton').click(() => {
-    console.log('login button clicked!!')
+  $('#loginButton').click((event) => {
     const $loginForm = loginForm();
     buildModal($loginForm, 'Login');
-    console.log('I built the modal')
->>>>>>> efb2380b5a0615969e25aa82f5f8d26f8765a38c
   });
 
   $('#registerButton').click(() => {
@@ -200,7 +189,7 @@ $(() => {
 
   });
 
-  $('body').on('click','#logoutButton',(event)=>{
+  $('body').on('click', '#logoutButton', (event) => {
 
     $.post('/logout');
 
