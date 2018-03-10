@@ -7,6 +7,7 @@ const ENV         = process.env.ENV || "development";
 const express     = require("express");
 const bodyParser  = require("body-parser");
 const app         = express();
+const bcrypt      = require("bcrypt");
 
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -41,11 +42,13 @@ app.get("/products", (req, res) => {
   res.render("products");
 });
 
+
 app.post("/login", (req, res) => {
-  knex.select('*')
+  knex.select('id', 'password')
   .from('users')
   .where('email', req.body.email)
   .then((useremail) => {
+    console.log(bcrypt('123', 10));
     res.redirect('/');
   })
 });
