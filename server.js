@@ -50,8 +50,32 @@ app.post("/login", (req, res) => {
   })
 });
 
-app.get('/profile',(req,res)=>{
+app.get('/profile/:id',(req,res)=>{
   res.render('userUpdate');
+});
+
+app.post('/profile/:id',(req,res)=>{
+  res.render('userUpdate');
+});
+
+app.get('/schedule',(req,res)=>{
+
+});
+
+app.get('/schedule/:id',(req,res)=>{
+
+});
+
+app.post('schedule/:id/edit',(req,res)=>{
+
+});
+
+app.get('/about',(req,res)=>{
+
+});
+
+app.get('/contact',(req,res)=>{
+
 });
 
 app.listen(PORT, () => {
