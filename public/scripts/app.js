@@ -27,7 +27,7 @@ $(() => {
     var $passwordInput = $('<input>').addClass('input secret').attr({
       type: 'password',
       placeholder: 'Password',
-      name: 'userpassword',
+      name: 'userpassword'
     });
     var $passwordSpan = $('<span>').addClass('icon is-small is-left');
     var $passowrdIcon = $('<i>').addClass('fas fa-lock');
@@ -43,7 +43,7 @@ $(() => {
     $formDiv.append($passwordField);
 
     return $formDiv;
-  }
+  };
 
   const registerForm = () => {
     const $formDiv = $('<div>').addClass('container').attr('id', 'generalLoginForm');
@@ -76,7 +76,7 @@ $(() => {
     $passwordSpan.append($passowrdIcon);
     $formDiv.append($emailField).append($passwordField);
     return $formDiv;
-  }
+  };
 
   const buildModal = ($contentObj, text) => {
 
@@ -100,14 +100,19 @@ $(() => {
     $('html').addClass('is-clipped');
     const $modal = $base;
     return $modal;
-  }
+  };
+
+  $('#logoutButton').click(() => {
+
+    $.post("/logout", function() {
+      
+    });
+  });
 
 
   $('#loginButton').click(() => {
-    console.log('login button clicked!!')
     const $loginForm = loginForm();
     buildModal($loginForm, 'Login');
-    console.log('I built the modal')
   });
 
   $('#registerButton').click(() => {
@@ -132,7 +137,7 @@ $(() => {
     const $modal = $(this).parent().parent().parent();
     $modal.removeClass('is-active');
     $('html').removeClass('is-clipped');
-    $($modal).remove()
+    $($modal).remove();
   });
 
   $('body').on('click', '#modalLogin', function(event) {
@@ -146,9 +151,10 @@ $(() => {
     $.ajax({
       type: "POST",
       url: '/login',
-      data: dataObj,
+      data: dataObj
     }).then(() => {
       location = '/';
     });
 
+  });
 });

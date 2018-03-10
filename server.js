@@ -1,7 +1,8 @@
 "use strict";
 
 require('dotenv').config();
-
+const PORT          = process.env.PORT || 8080;
+const ENV           = process.env.ENV || "development";
 const cookieSession = require("cookie-session");
 const express       = require("express");
 const bodyParser    = require("body-parser");
@@ -15,8 +16,7 @@ const usersRoutes   = require("./routes/users");
 
 const app           = express();
 const saltRounds    = 10;
-const PORT          = process.env.PORT || 8080;
-const ENV           = process.env.ENV || "development";
+
 
 app.use(cookieSession({
   name: 'session',
@@ -111,11 +111,19 @@ app.post("/login", (req, res) => {
       console.log(user);
       req.session.user_id = user.id;
       req.session.loggedIn = !!user;
-      res.redirect('/')
+      res.redirect('/');
     })
     .catch(err => {
       console.log('Error: ', err.message);
     });
+});
+
+app.post("/logout", (req, res) => {
+  req.session.loggedIn = false;
+  req.session.id = '';
+  req.session = null;
+  res.redirect('/');
+
 });
 
 app.post('/profile/:id', (req, res) => {

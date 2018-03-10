@@ -1,25 +1,25 @@
 
 const carouselItems = [
-  // {
-  //     img: 'https://goo.gl/u6P9Pd',
-  //   title: 'Check out these nails!!',
-  //    video: 'https://goo.gl/2oFsTq'
-  // // },
-  // {
-  //     img: 'https://goo.gl/FRnwip',
-  //   title: 'Amazing Nails!!',
-  //    video: 'https://goo.gl/So2iCS'
-  // },
-  // {
-  //     img: 'https://goo.gl/aPkWSZ',
-  //   title: "Grace's Nails!!",
-  //    video: ''
-  // },
-  // {
-  //     img: 'https://goo.gl/H9w2ry',
-  //   title: 'This is a dog',
-  //    video: 'https://goo.gl/PSLWHj'
-  // },
+  {
+      img: 'https://goo.gl/u6P9Pd',
+    title: 'Check out these nails!!',
+     video: 'https://goo.gl/2oFsTq'
+  },
+  {
+      img: 'https://goo.gl/FRnwip',
+    title: 'Amazing Nails!!',
+     video: 'https://goo.gl/So2iCS'
+  },
+  {
+      img: 'https://goo.gl/aPkWSZ',
+    title: "Grace's Nails!!",
+     video: ''
+  },
+  {
+      img: 'https://goo.gl/H9w2ry',
+    title: 'This is a dog',
+     video: 'https://goo.gl/PSLWHj'
+  },
   {
       img: 'https://goo.gl/WwFgr3',
     title: 'A Little Bit of Bling',
