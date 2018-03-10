@@ -129,6 +129,7 @@ app.post('/register', (req, res) => {
         req.session.loggedIn = !!result;
         res.redirect('/');
       }).catch(err => {
+        console.log(email, password, hash, phone, name);
         console.log(err.message);
       });
   });
