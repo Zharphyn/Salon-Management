@@ -63,10 +63,6 @@ app.post("/login", (req, res) => {
   })
 });
 
-<<<<<<< HEAD
-app.get('/profile',(req,res)=>{
-  res.render('userUpdate');
-=======
 app.get("/about", (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
   res.render("about", templateVars);
@@ -75,7 +71,6 @@ app.get("/about", (req, res) => {
 app.get("/contact", (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
   res.render("contact", templateVars);
->>>>>>> loginroutes
 });
 
 

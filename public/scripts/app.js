@@ -150,12 +150,5 @@ $(() => {
       location = '/';
     });
 
-<<<<<<< HEAD
   });
-=======
-  })
-  // if (session.loggedin) {
-  //   $('#loginButton').text('I am now logout');
-  // }
->>>>>>> loginroutes
 });
