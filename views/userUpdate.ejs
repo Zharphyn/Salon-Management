@@ -40,7 +40,7 @@
                       <span class="tag is-link">Admin</span>
                     </label>
                     <div class="control">
-                      <input class="input" type="text" placeholder="Name">
+                      <input class="input" type="text" placeholder="Name" value="<%= user.name %>">
                     </div>
                   </div>
                   <!-- ### Email ### -->
@@ -100,6 +100,8 @@
     </section>
     <%- include('partials/footer.ejs')%>
       <script type="text/javascript" src="vendor/bulma-accordion.min.js"></script>
+      <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
 </body>
 
 </html>

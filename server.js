@@ -2,17 +2,17 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const app         = express();
-const bcrypt      = require("bcrypt");
-
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
+const bcrypt = require("bcrypt");
+const cookieSession = require("cookie-session");
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -30,57 +30,90 @@ app.set("views", "views/");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+app.locals.user = {
+  name: 'Joel',
+  email: 'joel@joel.joel',
+  phoneNumber: '555-234-2345'
+};
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
+app.use(cookieSession({
+      name: 'session',
+      keys: ['di', 'brad', 'grace'],
+      maxAge: 24 * 60 * 60 * 1000
+    }))
 
-// Home page
-app.get("/", (req, res) => {
-  res.render("index");
-});
+    // Home page
+    app.get("/", (req, res) => {
+      const templateVars = { loggedIn: req.session.loggedIn }
+      res.render("index", templateVars);
+    });
 
-app.get("/products", (req, res) => {
-  res.render("products");
-});
+    app.get("/products", (req, res) => {
+      res.render("products");
+    });
 
+    // Promise resolves with a user or rejects with
+    function authenticateUser(email, password) {
+      return knex.first('id', 'password')
+        .from('users')
+        .where({ email })
+        .then((user) => {
+          if (user === undefined) throw new Error('No User');
+          return bcrypt.compare(password, user.password)
+            .then((matches) => {
+              if (!matches) throw new Error('Password Mismatch')
+              return user;
+            });
+        });
+    }
+    app.post("/login", (req, res) => {
+      authenticateUser(req.body.email, req.body.password)
+        .then((user) => {
+          // Log them in.
+          console.log(user);
+          req.session.user_id = user.id;
+          req.session.loggedIn = !!user;
+          res.redirect('/')
+        })
+        .catch(err => {
+          // Tell them to go away
+        });
+    });
 
-app.post("/login", (req, res) => {
-  knex.select('id', 'password')
-  .from('users')
-  .where('email', req.body.email)
-  .then((useremail) => {
-    console.log(bcrypt('123', 10));
-    res.redirect('/');
-  })
-});
+    app.get('/profile', (req, res) => {
 
-app.get('/profile/:id',(req,res)=>{
-  res.render('userUpdate');
-});
+      res.render('userUpdate');
+    });
 
-app.post('/profile/:id',(req,res)=>{
-  res.render('userUpdate');
-});
+    app.get('/profile/:id', (req, res) => {
 
-app.get('/schedule',(req,res)=>{
+    });
 
-});
+    app.post('/profile/:id', (req, res) => {
 
-app.get('/schedule/:id',(req,res)=>{
+    });
 
-});
+    app.get('/schedule', (req, res) => {
 
-app.post('schedule/:id/edit',(req,res)=>{
+    });
 
-});
+    app.get('/schedule/:id', (req, res) => {
 
-app.get('/about',(req,res)=>{
+    });
 
-});
+    app.post('schedule/:id/edit', (req, res) => {
 
-app.get('/contact',(req,res)=>{
+    });
 
-});
+    app.get('/about', (req, res) => {
 
-app.listen(PORT, () => {
-  console.log("Example app listening on port " + PORT);
-});
+    });
+
+    app.get('/contact', (req, res) => {
+      res.json(['some', 'stuff']);
+    });
+
+    app.listen(PORT, () => {
+      console.log("Example app listening on port " + PORT);
+    });
