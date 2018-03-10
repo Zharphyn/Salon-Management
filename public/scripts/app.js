@@ -147,7 +147,8 @@ $(() => {
       type: "POST",
       url: '/login',
       data: dataObj,
-    }).then(() => location = '/');
+    }).then(() => {
+      location = '/';
+    });
 
-  });
 });
