@@ -42,15 +42,15 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   const templateVars = {loggedIn: req.session.loggedin};
-  var x = 'innnocuous cheerful message not written by a crazy mentor';
+  // var x = 'innnocuous cheerful message not written by a crazy mentor';
 
   res.render("index", templateVars);
 });
 
 app.get("/products", (req, res) => {
-  res.render("products");
+  const templateVars = { loggedIn: req.session.loggedin };
+  res.render("products", templateVars);
 });
-
 
 app.post("/login", (req, res) => {
   knex.select('id', 'password')
@@ -64,11 +64,13 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.render("about");
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render("about", templateVars);
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render("contact", templateVars);
 });
 
 
