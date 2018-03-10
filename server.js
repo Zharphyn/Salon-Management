@@ -113,7 +113,7 @@ app.post('schedule/:id/edit', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  const { email, password, phone, name } = req.body.user;
+  const { email, password, phone, name } = req.body;
 
   bcrypt.hash(password, 10, (err, hash) => {
     knex('users')
