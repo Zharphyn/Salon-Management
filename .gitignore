@@ -1,8 +1,8 @@
 node_modules/
 public/styles
+styles/.sass-cache/
 .env
 *.log
 *.sqlite3
 .ds_store
 package-lock.json
-
