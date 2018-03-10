@@ -38,82 +38,112 @@ app.locals.user = {
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 app.use(cookieSession({
-      name: 'session',
-      keys: ['di', 'brad', 'grace'],
-      maxAge: 24 * 60 * 60 * 1000
-    }))
+  name: 'session',
+  keys: ['di', 'brad', 'grace'],
+  maxAge: 24 * 60 * 60 * 1000
+}))
 
-    // Home page
-    app.get("/", (req, res) => {
-      const templateVars = { loggedIn: req.session.loggedIn }
-      res.render("index", templateVars);
-    });
+// Home page
+app.get("/", (req, res) => {
+  const templateVars = { loggedIn: req.session.loggedIn }
+  res.render("index", templateVars);
+});
 
-    app.get("/products", (req, res) => {
-      res.render("products");
-    });
+app.get("/products", (req, res) => {
+  res.render("products");
+});
 
-    // Promise resolves with a user or rejects with
-    function authenticateUser(email, password) {
-      return knex.first('id', 'password')
-        .from('users')
-        .where({ email })
-        .then((user) => {
-          if (user === undefined) throw new Error('No User');
-          return bcrypt.compare(password, user.password)
-            .then((matches) => {
-              if (!matches) throw new Error('Password Mismatch')
-              return user;
-            });
-        });
-    }
-    app.post("/login", (req, res) => {
-      authenticateUser(req.body.email, req.body.password)
-        .then((user) => {
-          // Log them in.
-          console.log(user);
-          req.session.user_id = user.id;
-          req.session.loggedIn = !!user;
-          res.redirect('/')
-        })
-        .catch(err => {
-          // Tell them to go away
+// Promise resolves with a user or rejects with
+function authenticateUser(email, password) {
+  return knex.first('id', 'password')
+    .from('users')
+    .where({ email })
+    .then((user) => {
+      if (user === undefined) throw new Error('No User');
+      return bcrypt.compare(password, user.password)
+        .then((matches) => {
+          if (!matches) throw new Error('Password Mismatch')
+          return user;
         });
     });
+}
 
-    app.get('/profile', (req, res) => {
-
-      res.render('userUpdate');
+app.post("/login", (req, res) => {
+  const { email, password } = req.body.user;
+  authenticateUser(email, email)
+    .then((user) => {
+      // Log them in.
+      console.log(user);
+      req.session.user_id = user.id;
+      req.session.loggedIn = !!user;
+      res.redirect('/');
+    })
+    .catch(err => {
+      // Tell them to go away
+      console.log(err.message);
     });
+});
 
-    app.get('/profile/:id', (req, res) => {
+app.get('/profile', (req, res) => {
 
-    });
+  res.render('userUpdate');
+});
 
-    app.post('/profile/:id', (req, res) => {
+app.get('/profile/:id', (req, res) => {
 
-    });
+});
 
-    app.get('/schedule', (req, res) => {
+app.post('/profile/:id', (req, res) => {
 
-    });
+});
 
-    app.get('/schedule/:id', (req, res) => {
+app.get('/schedule', (req, res) => {
 
-    });
+});
 
-    app.post('schedule/:id/edit', (req, res) => {
+app.get('/schedule/:id', (req, res) => {
 
-    });
+});
 
-    app.get('/about', (req, res) => {
+app.post('schedule/:id/edit', (req, res) => {
 
-    });
+});
 
-    app.get('/contact', (req, res) => {
-      res.json(['some', 'stuff']);
-    });
+app.post('/register', (req, res) => {
+  const { email, password, phone, name } = req.body;
 
-    app.listen(PORT, () => {
-      console.log("Example app listening on port " + PORT);
-    });
+  bcrypt.hash(password, 10, (err, hash) => {
+    knex('users')
+      .returning('id')
+      .insert({
+        email: email,
+        password: hash,
+        name: name,
+        phone_number: phone,
+        type_id: 1
+      }).then((result) => {
+        req.session.user_id = result.id;
+        req.session.loggedIn = !!result;
+        res.redirect('/');
+      }).catch(err => {
+        console.log(err.message);
+      });
+  });
+
+
+
+});
+
+
+
+app.get('/about', (req, res) => {
+
+});
+
+app.get('/contact', (req, res) => {
+  res.json(['some', 'stuff']);
+});
+
+app.listen(PORT, () => {
+  console.log("Example app listening on port " + PORT);
+});
