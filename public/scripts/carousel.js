@@ -1,5 +1,6 @@
 
-const carouselItems = [{
+const carouselItems = [
+  {
       img: 'https://goo.gl/u6P9Pd',
     title: 'Check out these nails!!',
      video: 'https://goo.gl/2oFsTq'
@@ -55,9 +56,9 @@ $(() => {
   function buildNavigation() {
     let $navigation = $('<div>').addClass('carousel-navigation is-centered');
     const $nav_left = $('<div>').addClass('carousel-nav-left');
-    const $text_left = $('<i>').addClass('fa fa-chevron-left').attr('aria-hidden','true');
+    const $text_left = $('<i>').addClass('fa fa-chevron-left').attr('aria-hidden', 'true');
     const $nav_right = $('<div>').addClass('carousel-nav-right');
-    const $text_right = $('<i>').addClass('fa fa-chevron-right').attr('aria-hidden','true');
+    const $text_right = $('<i>').addClass('fa fa-chevron-right').attr('aria-hidden', 'true');
 
     $navigation.append($nav_left);
     $navigation.append($text_left);
@@ -68,7 +69,7 @@ $(() => {
   }
 
   function renderCarousel () {
-    let $carousel = $('<div>').addClass('carousel is-centered is-animated carousel-animate-slide').attr('data-autoplay','true');
+    let $carousel = $('<div>').addClass('carousel is-centered is-animated carousel-animate-slide').attr('data-autoplay', 'true');
     let $carousel_container = $('<div>').addClass('carousel-container');
     const $carousel_navigation = buildNavigation();
     carouselItems.forEach(function(element) {

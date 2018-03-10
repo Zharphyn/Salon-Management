@@ -1,0 +1,33 @@
+
+
+a cookie is a browser technology
+  (written by server, for the server to read, but stored on the client)
+  (particular details about encoding etc)
+
+HTTP is a "stateless protocol"
+  when processing any given response, the server knows only about the request it is replying to
+
+a "session", in a non-technical sense, is a conversation
+in a more technical sense, a sequence of connected req/res cycles
+
+cookies are a technology that exists for the purpose of implementing sessions
+
+
+I want to store some data in a place that'll last through the session.
+Some kind of storehouse, or "store" for short.  A "session store", if you will.
+
+
+
+plan1
+  just throw the session data in the cookie, whatever
+  read it out using express oh wait what you cannot do that?  what?
+      okay, fine.  require('cookie-parser');
+      now we read the data from req.cookies, or some shit
+
+plan2
+  that manual cookie-writing shit is kinda low-tech.  I'm too cool.
+  require('cookie-session')';
+  read from req.session
+
+  
+
