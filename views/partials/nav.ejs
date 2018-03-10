@@ -1,41 +1,31 @@
 <nav id="topNav" class="navbar is-fixed-top">
-  <a class="navbar-item" href="https://bulma.io/">
+  <div class="container is-fluid">
+<!--     <div class="navbar-burger is-active">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div> -->
+    <a class="navbar-item" href="/">
         Home
       </a>
-  <div class="navbar-item has-dropdown is-hoverable">
-    <a class="navbar-link">
-      Products
-    </a>
-    <div class="navbar-dropdown">
-      <a class="navbar-item" href="/products">
-        Soft Gel
+    <a class="navbar-item" href="/products">
+        Products
       </a>
-      <a class="navbar-item" href="/products">
-        Hard Gel
-      </a>
-      <a class="navbar-item" href="/products">
-        Fill
-      </a>
-      <hr class="navbar-divider">
-      <div class="navbar-item">
-        Version 0.6.2
-      </div>
-    </div>
-  </div>
-  <a class="navbar-item" href="https://bulma.io/">
+    <a class="navbar-item" href="/services">
         Services
       </a>
-  <a class="navbar-item" href="https://bulma.io/">
+    <a class="navbar-item" href="/contact">
         Contact Us
       </a>
-  <div id="topNavButtons" class="navbar-item is-pulled-right">
-    <% if (!loggedIn) { %>
-    <a id="loginButton" class="button is-primary is-rounded is-pulled-right">login</a>
-    <a id="registerButton" class="button is-info is-rounded is-pulled-right">register</a>
-    <% } else { %>
-    <a id="logoutButton" class="button is-primary is-rounded is-pulled-right">logout</a>
-     <a id="userButton" class="button is-primary is-rounded is-pulled-right">edit</a>
-     <% } %>
-    <a class="button is-danger is-rounded is-pulled-right">Book Online</a>
+    <div id="topNavButtons" class="navbar-item navbar-end">
+      <% if (!loggedIn) { %>
+        <a id="loginButton" class="button is-primary is-rounded">login</a>
+        <a id="registerButton" class="button is-info is-rounded">register</a>
+        <% } else { %>
+          <a id="logoutButton" class="button is-primary is-rounded">logout</a>
+          <a id="userButton" class="button is-primary is-rounded">edit</a>
+          <% } %>
+            <a class="button is-danger is-rounded">Book Online</a>
+    </div>
   </div>
 </nav>

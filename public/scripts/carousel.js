@@ -34,9 +34,9 @@ const carouselItems = [{
     title: 'Blingy Nails!!',
      video: 'https://goo.gl/QKcVyR'
   }];
-          
 
-$(() => { 
+
+$(() => {
   function createCarouselItem(element){
     let $divCarouselItem = $('<div>').addClass('carousel-item has-background is-active');
     const $img = $('<img>').addClass('is-background').attr('src',element.img).attr('height','40');

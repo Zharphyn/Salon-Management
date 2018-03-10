@@ -36,6 +36,8 @@ app.locals.user = {
   phoneNumber: '555-234-2345'
 };
 // Mount all resource routes
+
+
 app.use("/api/users", usersRoutes(knex));
 app.use(cookieSession({
   name: 'session',
@@ -45,12 +47,13 @@ app.use(cookieSession({
 
 // Home page
 app.get("/", (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn }
-  res.render("index", templateVars);
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render("index",templateVars);
 });
 
 app.get("/products", (req, res) => {
-  res.render("products");
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render("products",templateVars);
 });
 
 // Promise resolves with a user or rejects with
@@ -69,11 +72,11 @@ function authenticateUser(email, password) {
 }
 
 app.post("/login", (req, res) => {
-  const { email, password } = req.body.user;
+  console.log(req.body)
+const { email, password } = req.body;
   authenticateUser(email, email)
     .then((user) => {
       // Log them in.
-      console.log(user);
       req.session.user_id = user.id;
       req.session.loggedIn = !!user;
       res.redirect('/');
@@ -85,8 +88,8 @@ app.post("/login", (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-
-  res.render('userUpdate');
+const templateVars = { loggedIn: req.session.loggedIn };
+  res.render('userUpdate',templateVars);
 });
 
 app.get('/profile/:id', (req, res) => {
@@ -110,7 +113,7 @@ app.post('schedule/:id/edit', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  const { email, password, phone, name } = req.body;
+  const { email, password, phone, name } = req.body.user;
 
   bcrypt.hash(password, 10, (err, hash) => {
     knex('users')
@@ -142,6 +145,11 @@ app.get('/about', (req, res) => {
 
 app.get('/contact', (req, res) => {
   res.json(['some', 'stuff']);
+});
+
+app.post('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
 });
 
 app.listen(PORT, () => {
