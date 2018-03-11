@@ -5,8 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Contact Us</title>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
 </head>
 <body>
-
+  <%- include('partials/nav.ejs')%>
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="columns is-centered">
+          <div class="column is-half has-text-centered">
+            <h1 class="title">Contact Us</h1>
+            <hr>
+            <h2>
+              <p>Call Us: 123-456-789</p>
+              &nbsp;
+              <p>Email Us:
+              <a href="">beautify@beautylabs.com</a>
+              </p>
+              &nbsp;
+              <p>Visit Us:
+                <a href="">128 W. Hastings. #350 Vancouver B.C. Canada V6B 1G8</a>
+              </p>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/footer.ejs')%>
 </body>
 </html>
