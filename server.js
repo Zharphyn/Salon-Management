@@ -96,9 +96,9 @@ app.post("/login", (req, res) => {
 app.get('/profile', (req, res) => {
   const id = req.session.user_id;
   knex.table('users')
-    .first('name','email','phone_number')
+    .first('name', 'email', 'phone_number')
     .where({ id })
-    .then((result) =>{
+    .then((result) => {
       if (result === undefined) throw new Error('User not found');
       const templateVars = {
         loggedIn: req.session.loggedIn,
@@ -107,7 +107,7 @@ app.get('/profile', (req, res) => {
         email: result.email,
         phoneNumber: result.phone_number
       };
-      console.log('templateVars:',templateVars);
+      console.log('templateVars:', templateVars);
       res.render("userUpdate", templateVars);
     })
     .catch(e => {
@@ -193,7 +193,7 @@ app.post('/editprofile', (req, res) => {
   console.log('id =', id);
   console.log('name =', name);
   console.log('email =', email);
-  console.log('phone =', phone); 
+  console.log('phone =', phone);
 
   knex('users')
     .where({ id })
@@ -226,19 +226,27 @@ app.get('/booking', (req, res) => {
 });
 //handle the database insert
 app.post('/booking', (req, res) => {
-  console.log(req.body); { special_request, start_time, end_time } = req.body; { user_id } = req.session;
+  console.log(req.body);
 
-  knex('appointment')
-    .return('id')
+  let { special_request, start_time, end_time } = req.body;  
+  let { user_id } = req.session;  
+  special_request = "polish nails real good!";  
+  start_time = 'March 28, 2018 10:00';  
+  end_time = 'March 28, 2018 11:00';  
+  user_id = 1;
+  knex('appointments')
+    .returning('id')
     .insert({
+      end_time: end_time,
       special_request: special_request,
       start_time: start_time,
       status_id: 1,
       user_id: user_id,
-      end_time: end_time
+      user_staff_id: 4
+
 
     }).then((result) => {
-
+      res.send(result);
     }).catch((err) => {
       // but there will never be error msg
       console.log(err.message);
