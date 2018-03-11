@@ -22,7 +22,7 @@
         </div>
       </div>
     </section>
-    <form method="post" action="/booking">
+    <form id="booking" method="post" action="/booking">
     <div class="container">
       <div class="box">
         <article class="media">
@@ -32,13 +32,13 @@
                 <div class="field">
                   <label class="label">Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input">
+                    <input id="bookingName" class="input wtf" type="text" placeholder="Text input">
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Email</label>
                   <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="email" placeholder="Email input" value="">
+                    <input id = "bookingEmail" class="input wtfemail" type="email" placeholder="Email input" value="">
                     <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
     </span>
@@ -47,7 +47,7 @@
                 <div class="field">
                   <label class="label">Phone Number</label>
                   <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="text" placeholder="Phone Number" value="">
+                    <input id="bookingNumber" class="input wtfphone" type="text" placeholder="Phone Number" value="">
                     <span class="icon is-small is-left">
       <i class="fas fa-phone"></i>
     </span>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="field is-grouped">
                   <div class="control">
-                    <button class="button is-link" type="submit">Submit</button>
+                    <button id="bookingbutton" class="button is-link" type="submit">Submit</button>
                   </div>
                   <div class="control">
                     <button class="button is-text">Cancel</button>

@@ -55,12 +55,7 @@ app.get("/", (req, res) => {
 
 app.get("/products", (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
-<<<<<<< HEAD
   res.render("products",templateVars);
-=======
-  res.render("products", templateVars);
-
->>>>>>> 63301866957bc9348433e07c45f88d6f9c67f93b
 });
 
 // Promise resolves with a user or rejects with
@@ -235,30 +230,29 @@ app.get('/booking', (req, res) => {
 //handle the database insert
 app.post('/booking', (req, res) => {
   console.log(req.body);
-
   let { special_request, start_time, end_time } = req.body;  
   let { user_id } = req.session;  
   special_request = "polish nails real good!";  
   start_time = 'March 28, 2018 10:00';  
   end_time = 'March 28, 2018 11:00';  
   user_id = 1;
-  knex('appointments')
-    .returning('id')
-    .insert({
-      end_time: end_time,
-      special_request: special_request,
-      start_time: start_time,
-      status_id: 1,
-      user_id: user_id,
-      user_staff_id: 4
+  // knex('appointments')
+  //   .returning('id')
+  //   .insert({
+  //     end_time: end_time,
+  //     special_request: special_request,
+  //     start_time: start_time,
+  //     status_id: 1,
+  //     user_id: user_id,
+  //     user_staff_id: 4
 
 
-    }).then((result) => {
-      res.send(result);
-    }).catch((err) => {
-      // but there will never be error msg
-      console.log(err.message);
-    });
+  //   }).then((result) => {
+  //     res.send(result);
+  //   }).catch((err) => {
+  //     // but there will never be error msg
+  //     console.log(err.message);
+  //   });
 });
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

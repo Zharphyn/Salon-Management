@@ -203,6 +203,23 @@ $(() => {
     });
   });
 
+  $('body').on('click', '#bookingbutton', (event) => {
+    let name = $('.wtf').val();
+    let email = $('.wtfemail').val();
+    let number = $('.wtfphone').val();
+    let dataObj = {
+      name:name,
+      email:email,
+      phone: number
+    };
+
+    $.ajax({
+      type: "POST",
+      url: '/booking',
+      data: dataObj,
+    }).then(() => location = '/');
+  });
+
   $('body').on('click', '#updateButton', (event) => {
     const name = escape($('#name').val());
     const email = escape($('#email').val());
