@@ -162,9 +162,28 @@ app.post('/logout', (req, res) => {
 
 app.get('/booking', (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
-  res.render('booking',templateVars);
+  res.render('booking', templateVars);
 });
+//handle the database insert
+app.post('/booking', (req, res) => {
+  console.log(req.body); { special_request, start_time, end_time } = req.body; { user_id } = req.session;
 
+  knex('appointment')
+    .return('id')
+    .insert({
+      special_request: special_request,
+      start_time: start_time,
+      status_id: 1,
+      user_id: user_id,
+      end_time: end_time
+
+    }).then((result) => {
+
+    }).catch((err) => {
+      // but there will never be error msg
+      console.log(err.message);
+    });
+});
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
