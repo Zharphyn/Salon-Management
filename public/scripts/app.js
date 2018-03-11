@@ -1,13 +1,13 @@
 $(() => {
 
-  $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done((users) => {
-    for (user of users) {
-      $("<div>").text(user.name).appendTo($("body"));
-    }
-  });
+  // $.ajax({
+  //   method: "GET",
+  //   url: "/api/users"
+  // }).done((users) => {
+  //   for (user of users) {
+  //     $("<div>").text(user.name).appendTo($("body"));
+  //   }
+  // });
 
   const loginForm = () => {
     var $formDiv = $('<div>').addClass('container').attr('id', 'generalLoginForm');
@@ -122,6 +122,7 @@ $(() => {
     const $modal = $base;
     return $modal;
   }
+
 
   $('#loginButton').click((event) => {
     const $loginForm = loginForm();

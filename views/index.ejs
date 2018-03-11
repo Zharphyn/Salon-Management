@@ -11,12 +11,24 @@
 
 <body>
   <%- include('partials/nav.ejs')%>
-    <section class="section">
-    <section class="main">
-      <div id="carousel" class="container is-fluid"></div>
+      <%- include('partials/carousel.ejs')%>
+
+    <section class="main container is-marginless">
+        <!--         <div id="carousel" class="container is-three-quarters-desktop"></div> -->
     </section>
+    <section class="hero is-medium is-primary is-marginless is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+        Featured Products
+      </h1>
+          <h2 class="subtitle">
+        Primary bold subtitle
+      </h2>
+        </div>
+      </div>
     </section>
     <%- include('partials/products.ejs')%>
-    <%- include('partials/footer.ejs')%>
+      <%- include('partials/footer.ejs')%>
 
 </html>

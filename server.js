@@ -48,12 +48,12 @@ app.use(cookieSession({
 // Home page
 app.get("/", (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
-  res.render("index",templateVars);
+  res.render("index", templateVars);
 });
 
 app.get("/products", (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
-  res.render("products",templateVars);
+  res.render("products", templateVars);
 });
 
 // Promise resolves with a user or rejects with
@@ -73,7 +73,7 @@ function authenticateUser(email, password) {
 
 app.post("/login", (req, res) => {
   console.log(req.body)
-const { email, password } = req.body;
+  const { email, password } = req.body;
   authenticateUser(email, email)
     .then((user) => {
       // Log them in.
@@ -88,8 +88,8 @@ const { email, password } = req.body;
 });
 
 app.get('/profile', (req, res) => {
-const templateVars = { loggedIn: req.session.loggedIn };
-  res.render('userUpdate',templateVars);
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render('userUpdate', templateVars);
 });
 
 app.get('/profile/:id', (req, res) => {
@@ -150,6 +150,12 @@ app.get('/contact', (req, res) => {
 app.post('/logout', (req, res) => {
   req.session = null;
   res.redirect('/');
+});
+
+
+app.get('/booking', (req, res) => {
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render('booking',templateVars);
 });
 
 app.listen(PORT, () => {
