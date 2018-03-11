@@ -140,11 +140,18 @@ app.post('/register', (req, res) => {
 
 
 app.get('/about', (req, res) => {
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render('about', templateVars);
+});
 
+app.get('/services', (req, res) => {
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render('service', templateVars);
 });
 
 app.get('/contact', (req, res) => {
-  res.json(['some', 'stuff']);
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render('contact', templateVars);
 });
 
 app.post('/logout', (req, res) => {
