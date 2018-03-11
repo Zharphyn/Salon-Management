@@ -96,7 +96,7 @@ app.post("/login", (req, res) => {
 app.get('/profile', (req, res) => {
   const id = req.session.user_id;
   knex.table('users')
-    .first('name', 'email', 'phone_number')
+    .first('name', 'email', 'phone_number', 'type_id')
     .where({ id })
     .then((result) => {
       if (result === undefined) throw new Error('User not found');
@@ -105,8 +105,9 @@ app.get('/profile', (req, res) => {
         id: req.session.user_id,
         user: result.name,
         email: result.email,
-        phoneNumber: result.phone_number
-      };
+        phoneNumber: result.phone_number,
+        typeid: result.type_id
+      };  
       console.log('templateVars:', templateVars);
       res.render("userUpdate", templateVars);
     })
