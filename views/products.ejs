@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-navbar-fixed-top">
 
 <head>
   <meta charset="UTF-8">
@@ -12,21 +12,20 @@
 
 <body>
   <%- include('partials/nav.ejs')%>
-
-
-    <section class="hero is-primary">
+    <section class="hero is-primary is-marginless">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            Primary title
+            Products
           </h1>
           <h2 class="subtitle">
-            Primary subtitle
+            Get them now!
           </h2>
         </div>
       </div>
     </section>
     <section class="main">
+      <%- include('partials/products.ejs')%>
     </section>
     <%- include('partials/footer.ejs')%>
 </body>

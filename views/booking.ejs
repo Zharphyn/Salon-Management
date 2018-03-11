@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+
+<head>
+  <title>Book Now
+  </title>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
+</head>
+
+<body>
+  <%- include('partials/nav.ejs')%>
+    <section class="hero is-primary is-marginless">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Book Now
+          </h1>
+          <h2 class="subtitle">
+            Get them now!
+          </h2>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      <div class="box">
+        <article class="media">
+          <div class="media-content">
+            <div class="content">
+              <section class="section">
+                <div class="field">
+                  <label class="label">Name</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Text input">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Email</label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="email" placeholder="Email input" value="">
+                    <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Phone Number</label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="text" placeholder="Phone Number" value="">
+                    <span class="icon is-small is-left">
+      <i class="fas fa-phone"></i>
+    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Product Select</label>
+                  <div class="control">
+                    <div class="select">
+                      <select>
+                        <!-- going to use ejs to generate the list of possible choices -->
+                        <option>Select dropdown</option>
+                        <option>With options</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Time Select</label>
+                  <div class="control">
+                    <div class="select">
+                      <select>
+                        <!-- going to use ejs to generate the list of possible choices -->
+                        <option>Select dropdown</option>
+                        <option>With options</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Message</label>
+                  <div class="control">
+                    <textarea class="textarea" placeholder="Textarea"></textarea>
+                  </div>
+                </div>
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button class="button is-link">Submit</button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-text">Cancel</button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+      </div>
+      </article>
+    </div>
+    </div>
+    </div>
+    <%- include('partials/footer.ejs')%>
+</body>
+
+</html>
