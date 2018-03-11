@@ -17,6 +17,8 @@ const knexLogger = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
+// Salt rounds used for encryption of passwords
+const salt = '10';
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -54,24 +56,64 @@ app.get("/", (req, res) => {
 app.get("/products", (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
   res.render("products", templateVars);
+
 });
 
 // Promise resolves with a user or rejects with
-function authenticateUser(email, password) {
-  return knex.first('id', 'password')
-    .from('users')
+function authenticateUser(email, password, req, res) {
+  let result = { id: 0, loggedIn: false };
+  return knex.table('users')
+    .first('id', 'password')
     .where({ email })
     .then((user) => {
       if (user === undefined) throw new Error('No User');
-      return bcrypt.compare(password, user.password)
+      result.id = user.id;
+      result.loggedIn = !!user;
+      bcrypt.compare(password, user.password)
         .then((matches) => {
           if (!matches) throw new Error('Password Mismatch')
-          return user;
+        })
+        .then((user) => {
+          req.session.user_id = result.id;
+          req.session.loggedIn = result.loggedIn;
+          res.redirect('/');
+        })
+        .catch(err => {
+          // Tell them to go away
+          console.log(err.message);
         });
+
     });
 }
 
 app.post("/login", (req, res) => {
+
+  const { email, password } = req.body;
+  authenticateUser(email, password, req, res);
+
+});
+
+app.get('/profile', (req, res) => {
+  const id = req.session.user_id;
+  knex.table('users')
+    .first('name','email','phone_number')
+    .where({ id })
+    .then((result) =>{
+      if (result === undefined) throw new Error('User not found');
+      const templateVars = {
+        loggedIn: req.session.loggedIn,
+        id: req.session.user_id,
+        user: result.name,
+        email: result.email,
+        phoneNumber: result.phone_number
+      };
+      console.log('templateVars:',templateVars);
+      res.render("userUpdate", templateVars);
+    })
+    .catch(e => {
+      console.log(e.message);
+    });
+
   console.log(req.body)
   const { email, password } = req.body;
   authenticateUser(email, email)
@@ -87,16 +129,7 @@ app.post("/login", (req, res) => {
     });
 });
 
-app.get('/profile', (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn };
-  res.render('userUpdate', templateVars);
-});
-
 app.get('/profile/:id', (req, res) => {
-
-});
-
-app.post('/profile/:id', (req, res) => {
 
 });
 
@@ -115,7 +148,7 @@ app.post('schedule/:id/edit', (req, res) => {
 app.post('/register', (req, res) => {
   const { email, password, phone, name } = req.body;
 
-  bcrypt.hash(password, 10, (err, hash) => {
+  bcrypt.hash(password, salt, (err, hash) => {
     knex('users')
       .returning('id')
       .insert({
@@ -132,12 +165,7 @@ app.post('/register', (req, res) => {
         console.log(err.message);
       });
   });
-
-
-
 });
-
-
 
 app.get('/about', (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
@@ -152,6 +180,38 @@ app.get('/services', (req, res) => {
 app.get('/contact', (req, res) => {
   const templateVars = { loggedIn: req.session.loggedIn };
   res.render('contact', templateVars);
+});
+
+app.post('/profile', (req, res) => {
+  res.redirect('/profile');
+});
+
+app.post('/editprofile', (req, res) => {
+  console.log('In the post function!!');
+  const { name, email, phone } = req.body;
+  const id = req.session.user_id;
+  console.log('id =', id);
+  console.log('name =', name);
+  console.log('email =', email);
+  console.log('phone =', phone); 
+
+  knex('users')
+    .where({ id })
+    .update({
+      name: name,
+      email: email,
+      phone_number: phone
+    })
+    .then((result) => {
+      console.log(result);
+    })
+    .catch(e => {
+      console.log('server.js Error:', e.message);
+    });
+});
+
+app.post('/profile/update', (req, res) => {
+
 });
 
 app.post('/logout', (req, res) => {
