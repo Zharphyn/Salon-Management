@@ -47,10 +47,26 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }))
 
+function checkLoggedIn(req, res) {
+  console.log('Logged in =', req.session.loggedIn);
+  if (!req.session.loggedIn) {
+    res.sendStatus(401)
+    res.redirect('/');
+    return 0;
+  } else {
+    return 1;
+  }
+
+}
+
+
 // Home page
 app.get("/", (req, res) => {
+  console.log('In get /');
   const templateVars = { loggedIn: req.session.loggedIn };
+  console.log(templateVars);
   res.render("index", templateVars);
+  console.log('Called render');
 });
 
 app.get("/products", (req, res) => {
@@ -95,54 +111,59 @@ app.post("/login", (req, res) => {
 
 app.get('/profile', (req, res) => {
   const id = req.session.user_id;
+  if (checkLoggedIn) {
+    knex.table('users')
+      .first('name', 'email', 'phone_number', 'type_id')
+      .where({ id })
+      .then((result) => {
+        if (result === undefined) throw new Error('User not found');
 
-  knex.table('users')
-    .first('name', 'email', 'phone_number', 'type_id')
-    .where({ id })
-    .then((result) => {
-      if (result === undefined) throw new Error('User not found');
- 
-      let type = 'unknown';
-      switch (result.type_id) {
-        case 1: type = 'Admin';
-          break;
-        case 2: type = 'Employee';
-          break;
-        case 3: type = 'Customer';
-          break;
-        default: type - 'No idea';
-      }
+        let type = 'unknown';
+        switch (result.type_id) {
+          case 1:
+            type = 'Admin';
+            break;
+          case 2:
+            type = 'Employee';
+            break;
+          case 3:
+            type = 'Customer';
+            break;
+          default:
+            type - 'No idea';
+        }
 
-      const templateVars = {
-        loggedIn: req.session.loggedIn,
-        id: req.session.user_id,
-        user: result.name,
-        email: result.email,
-        phoneNumber: result.phone_number,
-        typeid: result.type_id,
-        type: type
-      }; 
+        const templateVars = {
+          loggedIn: req.session.loggedIn,
+          id: req.session.user_id,
+          user: result.name,
+          email: result.email,
+          phoneNumber: result.phone_number,
+          typeid: result.type_id,
+          type: type
+        };
 
-      console.log('templateVars:', templateVars, 'User type:', type);
-      res.render("userUpdate", templateVars);
-    })
-    .catch(e => {
-      console.log(e.message);
-    });
+        console.log('templateVars:', templateVars, 'User type:', type);
+        res.render("userUpdate", templateVars);
+      })
+      .catch(e => {
+        console.log(e.message);
+      });
 
-  console.log(req.body)
-  const { email, password } = req.body;
-  authenticateUser(email, email)
-    .then((user) => {
-      // Log them in.
-      req.session.user_id = user.id;
-      req.session.loggedIn = !!user;
-      res.redirect('/');
-    })
-    .catch(err => {
-      // Tell them to go away
-      console.log(err.message);
-    });
+    console.log(req.body)
+    const { email, password } = req.body;
+    authenticateUser(email, email)
+      .then((user) => {
+        // Log them in.
+        req.session.user_id = user.id;
+        req.session.loggedIn = !!user;
+        res.redirect('/');
+      })
+      .catch(err => {
+        // Tell them to go away
+        console.log(err.message);
+      });
+  }
 });
 
 app.get('/profile/:id', (req, res) => {
@@ -203,27 +224,28 @@ app.post('/profile', (req, res) => {
 });
 
 app.post('/editprofile', (req, res) => {
-  console.log('In the post function!!');
-  const { name, email, phone } = req.body;
-  const id = req.session.user_id;
-  console.log('id =', id);
-  console.log('name =', name);
-  console.log('email =', email);
-  console.log('phone =', phone);
+  if (checkLoggedIn) {
+    const { name, email, phone } = req.body;
+    const id = req.session.user_id;
+    console.log('id =', id);
+    console.log('name =', name);
+    console.log('email =', email);
+    console.log('phone =', phone);
 
-  knex('users')
-    .where({ id })
-    .update({
-      name: name,
-      email: email,
-      phone_number: phone
-    })
-    .then((result) => {
-      console.log(result);
-    })
-    .catch(e => {
-      console.log('server.js Error:', e.message);
-    });
+    knex('users')
+      .where({ id })
+      .update({
+        name: name,
+        email: email,
+        phone_number: phone
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch(e => {
+        console.log('server.js Error:', e.message);
+      });
+  }
 });
 
 app.post('/profile/update', (req, res) => {
@@ -231,16 +253,13 @@ app.post('/profile/update', (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-  const logoutPromise = new Promise((resolve, reject) => {
-    req.session = null;
-  })
-  .then((result) => {
-    const templateVars = { loggedIn: false };
-    res.render("index", templateVars);
-  })
-  .catch(e => {
-    console.log('Error in logout', e.message);
-  });
+  console.log('In log out!!');
+  req.session.loggedIn = false;
+  console.log('I just set the logged in status to', req.session.loggedIn);
+  req.session = null;
+  console.log('Now I set the entire session to', req.session);
+  res.redirect('back');
+  console.log('Called the redirect to root');
 });
 
 
