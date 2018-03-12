@@ -16,6 +16,9 @@ $navbar-item-color:$black;
 $navbar-dropdown-background-color: $black;
 $navbar-dropdown-item-color: $white;
 
+body {
+  background-image: url("/images/dust_scratches.png");
+}
 // 3. Set the derived variables
 // Use the new pink as the primary color
 $primary: #00d1b2;
