@@ -17,6 +17,8 @@ const knexLogger = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
+// Salt rounds used for encryption of passwords
+const salt = '10';
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -92,43 +94,11 @@ app.post("/login", (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-  const id = req.session.user_id;
-  knex.table('users')
-    .first('name', 'email', 'phone_number')
-    .where({ id })
-    .then((result) => {
-      if (result === undefined) throw new Error('User not found');
-      const templateVars = {
-        loggedIn: req.session.loggedIn,
-        id: req.session.user_id,
-        user: result.name,
-        email: result.email,
-        phoneNumber: result.phone_number
-      };
-      console.log('templateVars:', templateVars);
-      res.render("userUpdate", templateVars);
-    })
-    .catch(e => {
-      console.log(e.message);
-    });
-
-  console.log(req.body)
-  const { email, password } = req.body;
-  authenticateUser(email, email)
-    .then((user) => {
-      // Log them in.
-      req.session.user_id = user.id;
-      req.session.loggedIn = !!user;
-      res.redirect('/');
-    })
-    .catch(err => {
-      // Tell them to go away
-      console.log(err.message);
-    });
+  const templateVars = { loggedIn: req.session.loggedIn };
+  res.render("userUpdate", templateVars);
 });
 
 app.get('/profile/:id', (req, res) => {
-
 });
 
 app.get('/schedule', (req, res) => {
@@ -240,9 +210,9 @@ app.get('/booking', (req, res) => {
 //handle the database insert
 app.post('/booking', (req, res) => {
   console.log(req.body);
+
   let { special_request, start_time, end_time } = req.body;  
-  let { user_id } = req.session;
-  !user_id ? user_id = 1 : user_id = user_id;
+  let { user_id } = req.session;  
   knex('appointments')
     .returning('id')
     .insert({
@@ -252,8 +222,10 @@ app.post('/booking', (req, res) => {
       status_id: 1,
       user_id: user_id,
       user_staff_id: 4
+
+
     }).then((result) => {
-      res.redirect('/');
+      res.send(result);
     }).catch((err) => {
       // but there will never be error msg
       console.log(err.message);
