@@ -18,7 +18,7 @@ const knexLogger = require('knex-logger');
 const usersRoutes = require("./routes/users");
 
 // Salt rounds used for encryption of passwords
-const salt = '10';
+const salt = 10;
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -31,12 +31,6 @@ app.set("view engine", "ejs");
 app.set("views", "views/");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
-app.locals.user = {
-  name: 'Joel',
-  email: 'joel@joel.joel',
-  phoneNumber: '555-234-2345'
-};
 // Mount all resource routes
 
 
@@ -53,8 +47,8 @@ function checkLoggedIn(req, res) {
       console.log('Logged in =', req.session.loggedIn);
       return true;
     }
-  } catch(e) {
-    console.log('error = ',e.message);
+  } catch (e) {
+    console.log('error = ', e.message);
     return false;
   }
 }
@@ -111,7 +105,7 @@ app.post("/login", (req, res) => {
 
 app.get('/profile', (req, res) => {
   const id = req.session.user_id;
-  if ((checkLoggedIn(req,res))) {
+  if ((checkLoggedIn(req, res))) {
     knex.table('users')
       .first('name', 'email', 'phone_number', 'type_id')
       .where({ id })
@@ -150,31 +144,66 @@ app.get('/profile', (req, res) => {
         console.log(e.message);
       });
 
-    console.log(req.body)
-    const { email, password } = req.body;
-    authenticateUser(email, email)
-      .then((user) => {
-        // Log them in.
-        req.session.user_id = user.id;
-        req.session.loggedIn = !!user;
-        res.redirect('/');
+    knex.table('users')
+      .first('name', 'email', 'phone_number', 'type_id')
+      .where({ id })
+      .then((result) => {
+        if (result === undefined) throw new Error('User not found');
+
+        let type = 'unknown';
+        switch (result.type_id) {
+          case 1:
+            type = 'Admin';
+            break;
+          case 2:
+            type = 'Employee';
+            break;
+          case 3:
+            type = 'Customer';
+            break;
+          default:
+            type - 'No idea';
+        }
+
+        const templateVars = {
+          loggedIn: req.session.loggedIn,
+          id: req.session.user_id,
+          user: result.name,
+          email: result.email,
+          phoneNumber: result.phone_number,
+          typeid: result.type_id,
+          type: type
+        };
+
+        res.render("userUpdate", templateVars);
       })
-      .catch(err => {
-        // Tell them to go away
-        console.log(err.message);
+      .catch(e => {
+        console.log(e.message);
       });
-  } else {
-    res.redirect('/');
-  }
+
+  });
 });
 
-app.get('/profile/:id', (req, res) => {
-
-});
+app.get('/profile/:id', (req, res) => {});
 
 app.get('/schedule', (req, res) => {
+  knex('appointments')
+    .join('users', 'user_id', '=', 'users.id')
+    .select('*')
+    .then((rows) => {
+      res.json(rows);
+    });
 
 });
+
+app.get('/staff', (req, res) => {
+  knex('appointments')
+    .join('users', 'user_staff_id', '=', 'users.id')
+    .select('*')
+    .then((rows) => {
+      res.json(rows);
+    });
+})
 
 app.get('/schedule/:id', (req, res) => {
 
@@ -187,7 +216,7 @@ app.post('schedule/:id/edit', (req, res) => {
 app.post('/register', (req, res) => {
   const { email, password, phone, name } = req.body;
 
-  bcrypt.hash(password, salt, (err, hash) => {
+  bcrypt.hash(password, 10, (err, hash) => {
     knex('users')
       .returning('id')
       .insert({
@@ -226,7 +255,7 @@ app.post('/profile', (req, res) => {
 });
 
 app.post('/editprofile', (req, res) => {
-  if (checkLoggedIn(req,res)) {
+  if (checkLoggedIn(req, res)) {
     const { name, email, phone } = req.body;
     const id = req.session.user_id;
     console.log('id =', id);
@@ -257,13 +286,9 @@ app.post('/profile/update', (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-  console.log('In log out!!');
   req.session.loggedIn = false;
-  console.log('I just set the logged in status to', req.session.loggedIn);
   req.session = null;
-  console.log('Now I set the entire session to', req.session);
   res.redirect('back');
-  console.log('Called the redirect to root');
 });
 
 
@@ -277,10 +302,6 @@ app.post('/booking', (req, res) => {
 
   let { special_request, start_time, end_time } = req.body;  
   let { user_id } = req.session;  
-  special_request = "polish nails real good!";  
-  start_time = 'March 28, 2018 10:00';  
-  end_time = 'March 28, 2018 11:00';  
-  user_id = 1;
   knex('appointments')
     .returning('id')
     .insert({
@@ -299,6 +320,8 @@ app.post('/booking', (req, res) => {
       console.log(err.message);
     });
 });
+
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
