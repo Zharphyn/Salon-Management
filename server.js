@@ -29,7 +29,9 @@ app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
 app.set("views", "views/");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(express.static("public"));
 // Mount all resource routes
 
@@ -57,21 +59,30 @@ function checkLoggedIn(req, res) {
 // Home page
 app.get("/", (req, res) => {
   console.log('In get /');
-  const templateVars = { loggedIn: req.session.loggedIn };
-  res.render("index",templateVars);
+  const templateVars = {
+    loggedIn: req.session.loggedIn
+  };
+  res.render("index", templateVars);
 });
 
 app.get("/products", (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn };
-  res.render("products",templateVars);
+  const templateVars = {
+    loggedIn: req.session.loggedIn
+  };
+  res.render("products", templateVars);
 });
 
 // Promise resolves with a user or rejects with
 function authenticateUser(email, password, req, res) {
-  let result = { id: 0, loggedIn: false };
+  let result = {
+    id: 0,
+    loggedIn: false
+  };
   return knex.table('users')
     .first('id', 'password')
-    .where({ email })
+    .where({
+      email
+    })
     .then((user) => {
       if (user === undefined) throw new Error('No User');
       result.id = user.id;
@@ -95,7 +106,10 @@ function authenticateUser(email, password, req, res) {
 
 app.post("/login", (req, res) => {
 
-  const { email, password } = req.body;
+  const {
+    email,
+    password
+  } = req.body;
   authenticateUser(email, password, req, res);
 
 });
@@ -106,7 +120,9 @@ app.get('/profile', (req, res) => {
   if (checkLoggedIn(req, res)) {
     knex.table('users')
       .first('name', 'email', 'phone_number', 'type_id')
-      .where({ id })
+      .where({
+        id
+      })
       .then((result) => {
         if (result === undefined) throw new Error('User not found');
 
@@ -175,7 +191,12 @@ app.post('schedule/:id/edit', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  const { email, password, phone, name } = req.body;
+  const {
+    email,
+    password,
+    phone,
+    name
+  } = req.body;
 
   bcrypt.hash(password, 10, (err, hash) => {
     knex('users')
@@ -198,17 +219,23 @@ app.post('/register', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn };
+  const templateVars = {
+    loggedIn: req.session.loggedIn
+  };
   res.render('about', templateVars);
 });
 
 app.get('/services', (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn };
+  const templateVars = {
+    loggedIn: req.session.loggedIn
+  };
   res.render('service', templateVars);
 });
 
 app.get('/contact', (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn };
+  const templateVars = {
+    loggedIn: req.session.loggedIn
+  };
   res.render('contact', templateVars);
 });
 
@@ -218,11 +245,17 @@ app.post('/profile', (req, res) => {
 
 app.post('/editprofile', (req, res) => {
   if (checkLoggedIn(req, res)) {
-    const { name, email, phone } = req.body;
+    const {
+      name,
+      email,
+      phone
+    } = req.body;
     const id = req.session.user_id;
 
     knex('users')
-      .where({ id })
+      .where({
+        id
+      })
       .update({
         name: name,
         email: email,
@@ -239,25 +272,32 @@ app.post('/editprofile', (req, res) => {
   }
 });
 
-app.post('/profile/update', (req, res) => {
-
-});
-
 app.post('/logout', (req, res) => {
   req.session.loggedIn = false;
   req.session = null;
-  res.redirect('back');
+  res.redirect('/');
 });
 
 app.get('/booking', (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn };
-  res.render('booking', templateVars);
+  if (checkLoggedIn(req, res)) {
+    const templateVars = {
+      loggedIn: req.session.loggedIn
+    };
+    res.render('booking', templateVars);
+  } else {
+    res.redirect('..');
+  }
 });
 //handle the database insert
 app.post('/booking', (req, res) => {
-  console.log(req.body);
-  let { special_request, start_time, end_time } = req.body;  
-  let { user_id } = req.session;  
+  let {
+    special_request,
+    start_time,
+    end_time
+  } = req.body;  
+  let {
+    user_id
+  } = req.session;  
   knex('appointments')
     .returning('id')
     .insert({
@@ -267,10 +307,8 @@ app.post('/booking', (req, res) => {
       status_id: 1,
       user_id: user_id,
       user_staff_id: 4
-
-
     }).then((result) => {
-      res.send(result);
+      res.redirect('/');
     }).catch((err) => {
       // but there will never be error msg
       console.log(err.message);

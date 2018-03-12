@@ -1,11 +1,11 @@
 <nav id="topNav" class="navbar is-fixed-top">
   <div class="container is-fluid">
-<!--     <div class="navbar-burger is-active">
+    <div class="navbar-burger is-active"> 
       <span></span>
       <span></span>
       <span></span>
-    </div> -->
-    <a class="navbar-item" href="/">
+    </div>
+    <a class="navbar-item has-text-weight-bold" href="/">
         Home
       </a>
     <a class="navbar-item" href="/products">
@@ -19,13 +19,16 @@
       </a>
     <div id="topNavButtons" class="navbar-item navbar-end">
       <% if (!loggedIn) { %>
-        <a id="loginButton" class="button is-primary is-rounded">login</a>
-        <a id="registerButton" class="button is-info is-rounded">register</a>
+        <a id="loginButton" class="button is-primary is-outlined has-text-weight-bold">Login</a>
+        &nbsp;
+        <a id="registerButton" class="button is-info is-outlined has-text-weight-bold">Register</a>
         <% } else { %>
-          <a id="logoutButton" class="button is-primary is-rounded">logout</a>
-          <a id="userButton" class="button is-primary is-rounded">edit</a>
+          <a id="logoutButton" class="button is-primary is-outlined has-text-weight-bold">Logout</a>
+          &nbsp;
+          <a id="userButton" class="button is-info is-outlined has-text-weight-bold">Edit</a>
+          &nbsp;
+          <a id="bookNow"class="button is-danger is-outlined has-text-weight-bold" href="/booking">Book Online</a>
           <% } %>
-            <a id="bookNow"class="button is-danger is-rounded" href="/booking">Book Online</a>
     </div>
   </div>
 </nav>

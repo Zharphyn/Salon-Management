@@ -241,6 +241,8 @@ $(() => {
   });
 
   $('body').on('click', '#logoutButton', (event) => {
-    $.post('/logout');
+    $.post('/logout').done(function() {
+      location = "/";
+    });
   });
 });
