@@ -105,6 +105,7 @@ app.post("/login", (req, res) => {
 
 app.get('/profile', (req, res) => {
   const id = req.session.user_id;
+  console.log('this is di:', id);
   if (checkLoggedIn(req, res)) {
     knex.table('users')
       .first('name', 'email', 'phone_number', 'type_id')
@@ -141,7 +142,7 @@ app.get('/profile', (req, res) => {
         res.render("userUpdate", templateVars);
       })
       .catch(e => {
-        console.log(e.message);
+        console.log('this is the error message:', e.message);
       });
   };
 });
@@ -189,7 +190,8 @@ app.post('/register', (req, res) => {
         phone_number: phone,
         type_id: 1
       }).then((result) => {
-        req.session.user_id = result.id;
+        console.log(result);
+        req.session.user_id = result[0];
         req.session.loggedIn = !!result;
         res.redirect('/');
       }).catch(err => {
