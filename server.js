@@ -18,7 +18,7 @@ const knexLogger = require('knex-logger');
 const usersRoutes = require("./routes/users");
 
 // Salt rounds used for encryption of passwords
-const salt = '10';
+const salt = 10;
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -31,12 +31,6 @@ app.set("view engine", "ejs");
 app.set("views", "views/");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
-app.locals.user = {
-  name: 'Joel',
-  email: 'joel@joel.joel',
-  phoneNumber: '555-234-2345'
-};
 // Mount all resource routes
 
 
@@ -94,8 +88,41 @@ app.post("/login", (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-  const templateVars = { loggedIn: req.session.loggedIn };
-  res.render("userUpdate", templateVars);
+  const id = req.session.user_id;
+
+  knex.table('users')
+    .first('name', 'email', 'phone_number', 'type_id')
+    .where({ id })
+    .then((result) => {
+      if (result === undefined) throw new Error('User not found');
+
+      let type = 'unknown';
+      switch (result.type_id) {
+        case 1: type = 'Admin';
+          break;
+        case 2: type = 'Employee';
+          break;
+        case 3: type = 'Customer';
+          break;
+        default: type - 'No idea';
+      }
+
+      const templateVars = {
+        loggedIn: req.session.loggedIn,
+        id: req.session.user_id,
+        user: result.name,
+        email: result.email,
+        phoneNumber: result.phone_number,
+        typeid: result.type_id,
+        type: type
+      };
+
+      console.log('templateVars:', templateVars, 'User type:', type);
+      res.render("userUpdate", templateVars);
+    })
+    .catch(e => {
+      console.log(e.message);
+    });
 });
 
 app.get('/profile/:id', (req, res) => {
@@ -198,8 +225,16 @@ app.post('/profile/update', (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/');
+  const logoutPromise = new Promise((resolve, reject) => {
+    req.session = null;
+  })
+  .then((result) => {
+    const templateVars = { loggedIn: false };
+    res.render("index", templateVars);
+  })
+  .catch(e => {
+    console.log('Error in logout', e.message);
+  });
 });
 
 
