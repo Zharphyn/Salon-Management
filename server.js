@@ -134,8 +134,23 @@ app.get('/profile/:id', (req, res) => {
 });
 
 app.get('/schedule', (req, res) => {
+  knex('appointments')
+    .join('users', 'user_id', '=', 'users.id')
+    .select('*')
+    .then((rows) => {
+      res.json(rows);
+    });
 
 });
+
+app.get('/staff', (req, res) => {
+  knex('appointments')
+    .join('users', 'user_staff_id', '=', 'users.id')
+    .select('*')
+    .then((rows) => {
+      res.json(rows);
+    });
+})
 
 app.get('/schedule/:id', (req, res) => {
 
@@ -230,9 +245,10 @@ app.post('/booking', (req, res) => {
 
   let { special_request, start_time, end_time } = req.body;  
   let { user_id } = req.session;  
+  console.log('this is userid:',user_id);
   special_request = "polish nails real good!";  
-  start_time = 'March 28, 2018 10:00';  
-  end_time = 'March 28, 2018 11:00';  
+  start_time = 'March 28, 2018 20:00';  
+  end_time = 'March 28, 2018 21:00';  
   user_id = 1;
   knex('appointments')
     .returning('id')
@@ -252,6 +268,8 @@ app.post('/booking', (req, res) => {
       console.log(err.message);
     });
 });
+
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
