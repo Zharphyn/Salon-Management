@@ -143,43 +143,6 @@ app.get('/profile', (req, res) => {
       .catch(e => {
         console.log(e.message);
       });
-
-    knex.table('users')
-      .first('name', 'email', 'phone_number', 'type_id')
-      .where({ id })
-      .then((result) => {
-        if (result === undefined) throw new Error('User not found');
-
-        let type = 'unknown';
-        switch (result.type_id) {
-          case 1:
-            type = 'Admin';
-            break;
-          case 2:
-            type = 'Employee';
-            break;
-          case 3:
-            type = 'Customer';
-            break;
-          default:
-            type - 'No idea';
-        }
-
-        const templateVars = {
-          loggedIn: req.session.loggedIn,
-          id: req.session.user_id,
-          user: result.name,
-          email: result.email,
-          phoneNumber: result.phone_number,
-          typeid: result.type_id,
-          type: type
-        };
-
-        res.render("userUpdate", templateVars);
-      })
-      .catch(e => {
-        console.log(e.message);
-      });
   };
 });
 
