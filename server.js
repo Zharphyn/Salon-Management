@@ -48,15 +48,15 @@ app.use(cookieSession({
 }))
 
 function checkLoggedIn(req, res) {
-  console.log('Logged in =', req.session.loggedIn);
-  if (!req.session.loggedIn) {
-    res.sendStatus(401)
-    res.redirect('/');
-    return 0;
-  } else {
-    return 1;
+  try {
+    if (req.session.loggedIn) {
+      console.log('Logged in =', req.session.loggedIn);
+      return true;
+    }
+  } catch(e) {
+    console.log('error = ',e.message);
+    return false;
   }
-
 }
 
 
@@ -111,7 +111,7 @@ app.post("/login", (req, res) => {
 
 app.get('/profile', (req, res) => {
   const id = req.session.user_id;
-  if (checkLoggedIn) {
+  if ((checkLoggedIn(req,res))) {
     knex.table('users')
       .first('name', 'email', 'phone_number', 'type_id')
       .where({ id })
@@ -163,6 +163,8 @@ app.get('/profile', (req, res) => {
         // Tell them to go away
         console.log(err.message);
       });
+  } else {
+    res.redirect('/');
   }
 });
 
@@ -224,7 +226,7 @@ app.post('/profile', (req, res) => {
 });
 
 app.post('/editprofile', (req, res) => {
-  if (checkLoggedIn) {
+  if (checkLoggedIn(req,res)) {
     const { name, email, phone } = req.body;
     const id = req.session.user_id;
     console.log('id =', id);
@@ -245,6 +247,8 @@ app.post('/editprofile', (req, res) => {
       .catch(e => {
         console.log('server.js Error:', e.message);
       });
+  } else {
+    res.redirect('/');
   }
 });
 
