@@ -33,32 +33,28 @@
               <div class="accordion-body">
                 <div class="accordion-content">
                   <!-- ############################# MY INFO ############################# -->
-<<<<<<< HEAD
-
-=======
->>>>>>> 30238cb7a028e74493cdae11762f88ab784df46b
                   <div class="field">
                     <label class="label">Name
                       <% if (typeid === 3) { %>
                         <span class="tag is-link">Admin</span>
-                      <% } %>
+                        <% } %>
                     </label>
                     <div class="control">
-                      <input class="input" id='name' type="text" placeholder="Name" value="">
+                      <input class="input" id='name' type="text" placeholder="Name" value="<%= user %>">
                     </div>
                   </div>
                   <!-- ### Email ### -->
                   <div class="field">
                     <label class="label">Email</label>
                     <div class="control">
-                      <input class="input" id='email' type="email" placeholder="Email" value="">
+                      <input class="input" id='email' type="email" placeholder="Email" value="<%= email %>">
                     </div>
                   </div>
                   <!-- ### Phone Number ### -->
                   <div class="field">
                     <label class="label">Phone Number</label>
                     <div class="control">
-                      <input class="input" id='phone' type="tel" placeholder="Phone #" value="">
+                      <input class="input" id='phone' type="tel" placeholder="Phone #" value="<%= phoneNumber %>">
                     </div>
                   </div>
                   <!-- ### Password ### -->
@@ -85,15 +81,15 @@
                 <div>
                   <%- include('partials/user_management.ejs') %>
                 </div>
-                <% } else if (typeid === 2) { %>
-                  <div>
-                    <%- include('partials/employee_schedules.ejs')%>
-                  </div>
-                  <% } else { %>
-                    <div>
-                      <%- include('partials/customer_history.ejs')%>
-                    </div>
-                    <% } %>
+              <% } else if (typeid === 2) { %>
+                <div>
+                  <%- include('partials/employee_schedules.ejs')%>
+                </div>
+              <% } else { %>
+                <div>
+                  <%- include('partials/customer_history.ejs')%>
+                </div>
+              <% } %>
             </div>
       </div>
       </section>
