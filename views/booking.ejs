@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html class="has-navbar-fixed-top">
+<html lang="en" class="has-navbar-fixed-top">
 
 <head>
-  <title>Book Now
-  </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Book Now</title>
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" type="text/css" href="/styles/main.css">
 </head>
@@ -29,77 +31,86 @@
           <div class="media-content">
             <div class="content">
               <section class="section">
-                <div class="field">
-                  <label class="label">Name</label>
-                  <div class="control">
-                    <input id="bookingName" class="input wtf" type="text" placeholder="Text input">
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Email</label>
-                  <div class="control has-icons-left has-icons-right">
-                    <input id = "bookingEmail" class="input wtfemail" type="email" placeholder="Email input" value="">
-                    <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Phone Number</label>
-                  <div class="control has-icons-left has-icons-right">
-                    <input id="bookingNumber" class="input wtfphone" type="text" placeholder="Phone Number" value="">
-                    <span class="icon is-small is-left">
-      <i class="fas fa-phone"></i>
-    </span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Product Select</label>
-                  <div class="control">
-                    <div class="select">
-                      <select>
-                        <!-- going to use ejs to generate the list of possible choices -->
-                        <option>Select dropdown</option>
-                        <option>With options</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Time Select</label>
-                  <div class="control">
-                    <div class="select">
-                      <select>
-                        <!-- going to use ejs to generate the list of possible choices -->
-                        <option>Select dropdown</option>
-                        <option>With options</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Message</label>
-                  <div class="control" method="post" action="/booking">
-                    <textarea class="textarea" placeholder="Textarea"></textarea>
-                  </div>
-                </div>
-                <div class="field is-grouped">
-                  <div class="control">
-                    <button id="bookingbutton" class="button is-link" type="submit">Submit</button>
-                  </div>
-                  <div class="control">
-                    <button class="button is-text">Cancel</button>
-                  </div>
-                </div>
+                <section class="container">
+                  <form>
+                    <section class="section">
+                      <div class="container">
+                        <div class="row">
+                          <div class="columns">
+                            <div class="column is-one-quarter"></div>
+                            <div class="column">
+                              <div class="label">Date
+                                <input id="datepickerDemo" class="input" type="text" placeholder="Click to Select Date">
+                              </div>
+                              <div class="field">
+                                <label class="label">Start Time</label>
+                                <div class="control">
+                                  <div class="select">
+                                    <select id="startTime">
+                                      <!-- going to use ejs to generate the list of possible choices -->
+                                      <option>Select Time</option>
+                                      <option>10:00</option>
+                                      <option>11:00</option>
+                                      <option>12:00</option>
+                                      <option>13:00</option>
+                                      <option>14:00</option>
+                                      <option>15:00</option>
+                                      <option>16:00</option>
+                                      <option>17:00</option>
+                                      <option>18:00</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="field">
+                                <label class="label">End Time</label>
+                                <div class="control">
+                                  <div class="select">
+                                    <select id="endTime">
+                                      <!-- going to use ejs to generate the list of possible choices -->
+                                      <option>Select Time</option>
+                                      <option>11:00</option>
+                                      <option>12:00</option>
+                                      <option>13:00</option>
+                                      <option>14:00</option>
+                                      <option>15:00</option>
+                                      <option>16:00</option>
+                                      <option>17:00</option>
+                                      <option>18:00</option>
+                                      <option>19:00</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="field">
+                                <label class="label">Message</label>
+                                <div class="control">
+                                  <textarea id="bookingMessage" class="textarea" placeholder="Special Request"></textarea>
+                                </div>
+                              </div>
+                              <div class="field is-grouped is-pulled-right">
+                                <div class="control">
+                                  <button class="button is-text">Cancel</button>
+                                </div>
+                                <div class="control">
+                                  <button id="bookingButton" class="button is-link">Submit</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="column"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </form>
+                </section>
               </section>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </div>
-    </div>
-    </div>
-    </form>
+
     <%- include('partials/footer.ejs')%>
 </body>
 

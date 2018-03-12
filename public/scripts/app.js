@@ -144,7 +144,7 @@ $(() => {
   // use this template when element doesn't exist but you expect it to exist
   // $('body').on('click', '.modal-background', function(event){
 
-  $('body').on('click', '.modal-background', function(event) {
+  $('body').on('click', '.modal-background', function (event) {
     event.preventDefault();
     const $modal = $(this).parent();
     $modal.removeClass('is-active');
@@ -153,7 +153,7 @@ $(() => {
     $($modal).remove();
   });
 
-  $('body').on('click', '#modalCancel', function(event) {
+  $('body').on('click', '#modalCancel', function (event) {
     event.preventDefault();
     const $modal = $(this).parent().parent().parent();
     $modal.removeClass('is-active');
@@ -161,7 +161,7 @@ $(() => {
     $($modal).remove()
   });
 
-  $('body').on('click', '#modalLogin', function(event) {
+  $('body').on('click', '#modalLogin', function (event) {
     let email = $('.email').val();
     let password = $('.secret').val();
     let dataObj = {
@@ -177,7 +177,7 @@ $(() => {
 
   });
 
-  $('body').on('click', '#modalRegister', function(event) {
+  $('body').on('click', '#modalRegister', function (event) {
     let email = $('.email').val();
     let password = $('.secret').val();
     let name = $('.name').val();
@@ -198,27 +198,31 @@ $(() => {
   });
 
   $('body').on('click', '#userButton', (event) => {
-    $.post('/profile').done(function(){
+    $.post('/profile').done(function () {
       location = '/profile'
     });
   });
 
-  $('body').on('click', '#bookingbutton', (event) => {
-    let name = $('.wtf').val();
-    let email = $('.wtfemail').val();
-    let number = $('.wtfphone').val();
-    let dataObj = {
-      name:name,
-      email:email,
-      phone: number
-    };
+  function dateProcess(date, time) {
+    const dateStr = date + 'T' + time +':00';
+    return dateStr;
+  }
 
-    $.ajax({
-      type: "POST",
-      url: '/booking',
-      data: dataObj,
-    }).then(() => location = '/');
+  $('body').on('click', '#bookingButton', (event) => {
+    let date = $('#datepickerDemo').val();
+    let start_time = $('#startTime').val();
+    let end_time = $('#endTime').val();
+    let message = $('#bookingMessage').val();
+    let dataObj = {
+      start_time: dateProcess(date, start_time),
+      end_time: dateProcess(date, end_time),
+      special_request: message
+    };
+    console.log(dataObj);
+    $.post('/booking', dataObj);
   });
+
+
 
   $('body').on('click', '#updateButton', (event) => {
     const name = escape($('#name').val());
@@ -229,9 +233,9 @@ $(() => {
       email: email,
       phone: phone
     };
-    console.log (dataObj);
-    $.post(`/editprofile`, dataObj, function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+    console.log(dataObj);
+    $.post(`/editprofile`, dataObj, function (data, status) {
+      alert("Data: " + data + "\nStatus: " + status);
     });
 
   });
