@@ -105,7 +105,7 @@ app.post("/login", (req, res) => {
 
 app.get('/profile', (req, res) => {
   const id = req.session.user_id;
-  if ((checkLoggedIn(req, res))) {
+  if (checkLoggedIn(req, res)) {
     knex.table('users')
       .first('name', 'email', 'phone_number', 'type_id')
       .where({ id })
@@ -180,9 +180,9 @@ app.get('/profile', (req, res) => {
       .catch(e => {
         console.log(e.message);
       });
-
-  });
+  };
 });
+
 
 app.get('/profile/:id', (req, res) => {});
 
@@ -258,10 +258,6 @@ app.post('/editprofile', (req, res) => {
   if (checkLoggedIn(req, res)) {
     const { name, email, phone } = req.body;
     const id = req.session.user_id;
-    console.log('id =', id);
-    console.log('name =', name);
-    console.log('email =', email);
-    console.log('phone =', phone);
 
     knex('users')
       .where({ id })
