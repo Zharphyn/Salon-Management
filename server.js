@@ -242,14 +242,9 @@ app.get('/booking', (req, res) => {
 //handle the database insert
 app.post('/booking', (req, res) => {
   console.log(req.body);
-
   let { special_request, start_time, end_time } = req.body;  
-  let { user_id } = req.session;  
-  console.log('this is userid:',user_id);
-  special_request = "polish nails real good!";  
-  start_time = 'March 28, 2018 20:00';  
-  end_time = 'March 28, 2018 21:00';  
-  user_id = 1;
+  let { user_id } = req.session;
+  !user_id ? user_id = 1 : user_id = user_id;
   knex('appointments')
     .returning('id')
     .insert({
@@ -259,10 +254,8 @@ app.post('/booking', (req, res) => {
       status_id: 1,
       user_id: user_id,
       user_staff_id: 4
-
-
     }).then((result) => {
-      res.send(result);
+      res.redirect('/');
     }).catch((err) => {
       // but there will never be error msg
       console.log(err.message);
